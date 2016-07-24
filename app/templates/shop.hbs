@@ -2,12 +2,12 @@
 
 <div class="col-xs-7">
   {{#each products as |product index|}}
-    {{product-item product=product cart=cart}}
+    {{product-item product=product}}
   {{/each}}
 </div>
 
 <div class="col-xs-4">
-  {{show-cart cart=cart}}
+  {{show-cart}}
 </div>
 
 {{outlet}}
