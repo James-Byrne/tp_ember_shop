@@ -12,4 +12,12 @@ export default Ember.Component.extend({
     });
     return total;
   }),
+
+  actions: {
+    removeItem(id) {
+      this.get('store').findRecord('product', id).then(function(product) {
+        product.deleteRecord();
+      });
+    }
+  }
 });
