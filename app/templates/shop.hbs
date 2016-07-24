@@ -1,13 +1,21 @@
-<div class="col-xs-1"></div>
+<div class="row">
+  <div class="col-xs-1"></div>
 
-<div class="col-xs-7">
-  {{#each products as |product index|}}
-    {{product-item product=product}}
-  {{/each}}
+  <div class="col-xs-7">
+    {{#each products as |product index|}}
+      {{product-item product=product}}
+    {{/each}}
+  </div>
+
+  <div class="col-xs-4">
+    {{show-cart}}
+  </div>
 </div>
 
-<div class="col-xs-4">
-  {{show-cart}}
+<hr>
+
+<div class="row">
+This is where checkout form will be   
 </div>
 
 {{outlet}}
