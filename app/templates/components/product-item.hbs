@@ -3,11 +3,11 @@
     <img src="https://placekitten.com/245/310" alt="" />
   </div>
   <div class="product-content">
-    Kitten Name <br>
-    Price : infinite
+    <h4>{{product.name}}</h4>
+    Price: {{product.price}}
   </div>
   <div class="product-buttons">
-    <button class="btn btn-product btn-block">
+    <button {{action 'addToCart' product}} class="btn btn-product btn-block">
       Add to cart
       <span class="glyphicon glyphicon-shopping-cart pull-right" aria-hidden="true"></span>
     </button>
