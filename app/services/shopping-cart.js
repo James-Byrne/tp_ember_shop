@@ -5,7 +5,7 @@ import Ember from 'ember';
  */
 
 export default Ember.Service.extend({
-  item: null,
+  items: null,
 
   init() {
     this._super(...arguments);
