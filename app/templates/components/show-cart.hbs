@@ -3,27 +3,29 @@
     <h3 class="panel-title">Your Cart</h3>
   </div>
   <div class="panel-body">
-    <div class="col-xs-6">
-      Name
-    </div>
-    <div class="col-xs-4">
-      Amount
-    </div>
-    <div class="col-xs-2">
-      X
-    </div>
-    <hr>
-    {{#each cartItems as |item index|}}
-    <div class="">
-      <span>{{item.name}}</span>
-      <span>{{item.price}}</span>
-      <span>close</span>
-    </div>
-    {{/each}}
-    <hr>
-    <div class="col-xs-12">
-      Total
-    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each cartItems as |item index|}}
+          <tr>
+            <td>{{item.name}}</td>
+            <td>{{item.price}}</td>
+            <td><span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span></td>
+          </tr>
+        {{/each}}
+        <tr>
+          <td>Total</td>
+          <td>{{total}}</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
