@@ -7,20 +7,23 @@
       <thead>
         <tr>
           <th>Product</th>
+          <th>Amount</th>
           <th>Price</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        {{#each cartItems as |item index|}}
+        {{#each-in cartSortedItems as |item value|}}
           <tr>
-            <td>{{item.name}}</td>
-            <td>{{item.price}}</td>
-            <td><span style="color: red" {{action 'removeItem' item.id}} class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span></td>
+            <td>{{item}}</td>
+            <td>{{value.amount}}</td>
+            <td>{{value.price}}</td>
+            <td><span style="color: red" {{action 'removeItem' value.id}} class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span></td>
           </tr>
-        {{/each}}
+        {{/each-in}}
         <tr>
           <td>Total</td>
+          <td></td>
           <td>{{total}}</td>
           <td></td>
         </tr>

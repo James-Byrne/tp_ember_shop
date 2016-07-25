@@ -8,18 +8,31 @@
   padding: 25px 10px;
 }
 .btn-product {
-  color: #333;
-  background-color: #fff;
+  color: white;
+  background-color: #4862A3;
   border-color: #EBEAEA;
   border-radius: 0;
   text-align: left;
 }
 .btn-product:hover {
-  background-color: #EBEAEA;
+  background-color: #6a7aa2;
+  color: white;
 }
 .panel {
   margin-top: 30px;
 }
+.panel-default>.panel-heading {
+  background-color: #4862A3;
+  color: white
+}
 .affix {
   width: 300px;
+}
+.navbar {
+  background-color: #4862A3;
+  border-color: #4862A3;
+  border-radius: 0;
+}
+.navbar-default .navbar-brand {
+  color: white;
 }
