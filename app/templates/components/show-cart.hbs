@@ -18,7 +18,7 @@
             <td>{{item}}</td>
             <td>{{value.amount}}</td>
             <td>{{value.price}}</td>
-            <td><span style="color: red" {{action 'removeItem' value.id}} class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span></td>
+            <td><span {{action 'removeItem' value.id}} class="glyphicon glyphicon-minus pull-right remove-item" aria-hidden="true"></span></td>
           </tr>
         {{/each-in}}
         <tr>
@@ -31,5 +31,3 @@
     </table>
   </div>
 </div>
-
-{{yield}}
