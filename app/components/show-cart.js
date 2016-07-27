@@ -1,7 +1,29 @@
 import Ember from 'ember';
+import ScrollMixin from '../mixins/scrolling';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(ScrollMixin, {
   store: Ember.inject.service(),
+
+  didInsertElement: (function() {
+    return this._bindScrollingElement();
+  }),
+
+  willRemoveElement: (function() {
+    return this._unbindScrolling();
+  }),
+
+  _onScroll: (function() {
+    const cart = Ember.$('#cart');
+    const payment_section = Ember.$('#payment-section');
+
+    if ((cart.offset().top + cart.height()) >= payment_section.offset().top) {
+      cart.offset({
+        top: (payment_section.offset().top - cart.height())
+      });
+    } else {
+      cart.offset({top: Ember.$(window).scrollTop() + 100});
+    }
+  }),
 
   cartItems: Ember.computed('store.@each', function() {
     return this.get('store').peekAll('product');
@@ -26,7 +48,7 @@ export default Ember.Component.extend({
        * are deleted
        */
       items[item.get('name')].id = item.get('id');
-      
+
       if (items[item.get('name')].amount) {
         items[item.get('name')].amount += 1;
       } else {
