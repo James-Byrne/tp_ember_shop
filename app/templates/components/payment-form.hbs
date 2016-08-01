@@ -4,9 +4,29 @@
       <input class="btn-shadow" id="toggle-provider" type="checkbox" data-on="Realex" data-off="Testing Pays" data-onstyle="danger" data-offstyle="success" checked data-toggle="toggle">
     </div>
   </h2>
+
   <hr>
 
-  <form id="checkout-form" class="form-horizontal" onsubmit="return false">
+  <div class="col-xs-8">
+    {{credit-card-form number=number name=name month=month year=year cvc=cvc on-validate="validate"}}
+
+    <div class="form-group">
+      <label for="total" class="control-label">Total</label>
+      {{input value=total class="form-control" step="0.01" type="number"}}
+    </div>
+
+    {{currency-dropdown updateCurrency=(action 'updateCurrency')}}
+
+    <div class="form-group">
+      <label for="total" class="control-label">Converted Total</label>
+      <label class="control-label">{{convertedTotal}}</label>
+    </div>
+
+    <button class="btn btn-primary btn-block" {{action 'submitPayment'}} disabled={{disabled}}>Put a safe lock here</button>
+  </div>
+</div>
+
+{{!-- <form id="checkout-form" class="form-horizontal" onsubmit="return false">
 
     <div class="form-group">
       <label for="card-holder" class="control-label col-sm-4">First Name</label>
@@ -83,34 +103,34 @@
     <div class="form-group">
       <label for="total" class="control-label col-sm-4">Total</label>
       <div class="col-sm-3">
-        <input id="total" step="0.01" class="form-control" name="total" placeholder="{{total}}" value="{{total}}" type="number" required>
-      </div>
+        <input id="total" step="0.01" class="form-control" name="total" placeholder="{{total}}
+" value=" {{total}}" type="number" required>
+  </div>
 
-      <div id="dropdown" class="dropdown currency-dropdown col-sm-3">
-        <button class="btn btn-block btn-secondary dropdown-toggle dropdown-id" type="button" id="currencyDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" value="EUR">EUR <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-          <li><a id="EUR" href="#">EUR</a></li>
-          <li><a id="GBP" href="#">GBP</a></li>
-          <li><a id="USD" href="#">USD</a></li>
-          <li><a id="RUB" href="#">RUB</a></li>
-        </ul>
-      </div>
-      <span id="total-info" class="glyphicon glyphicon-info-sign realex-info" aria-hidden="true" data-toggle="tooltip" data-placement="right" data-title="Enter any amount in this field. Realex’s test system ignores the test amount."></span>
-    </div>
+  <div id="dropdown" class="dropdown currency-dropdown col-sm-3">
+    <button class="btn btn-block btn-secondary dropdown-toggle dropdown-id" type="button" id="currencyDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" value="EUR">EUR <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+      <li><a id="EUR" href="#">EUR</a></li>
+      <li><a id="GBP" href="#">GBP</a></li>
+      <li><a id="USD" href="#">USD</a></li>
+      <li><a id="RUB" href="#">RUB</a></li>
+    </ul>
+  </div>
+  <span id="total-info" class="glyphicon glyphicon-info-sign realex-info" aria-hidden="true" data-toggle="tooltip" data-placement="right" data-title="Enter any amount in this field. Realex’s test system ignores the test amount."></span>
+  </div>
 
-    <div class="form-group">
-      <label for="total" class="control-label col-sm-4">Converted Total</label>
-      <div class="col-sm-6">
-        <label id="convertedTotal" class="control-label"></label>
-      </div>
+  <div class="form-group">
+    <label for="total" class="control-label col-sm-4">Converted Total</label>
+    <div class="col-sm-6">
+      <label id="convertedTotal" class="control-label"></label>
     </div>
+  </div>
 
-    <div class="form-group">
-      <div class="col-sm-4"></div>
-      <div class="col-sm-6">
-        <button id="checkout" type="Submit" class="btn btn-primary btn-block">Checkout</button>
-      </div>
+  <div class="form-group">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-6">
+      <button id="checkout" type="Submit" class="btn btn-primary btn-block">Checkout</button>
     </div>
-  </form>
-</div>
+  </div>
+  </form> --}}
