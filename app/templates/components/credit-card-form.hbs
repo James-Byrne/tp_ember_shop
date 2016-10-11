@@ -1,0 +1,78 @@
+<h2>Checkout with
+  <div class="pull-right">
+    <input class="btn-shadow" id="toggle-provider" type="checkbox" data-on="Realex" data-off="Testing Pays" data-onstyle="danger" data-offstyle="success" checked data-toggle="toggle">
+  </div>
+</h2>
+
+<hr>
+<div class="col-sm-8">
+
+  <div class="col-sm-10 form-group">
+    <label class="control-label">Name</label>
+    {{input type="text" value=name class="form-control"}}
+  </div>
+
+  <div class="col-sm-10 form-group">
+    <label class="control-label">Card Number</label>
+    {{input-credit-card-number number=number class="form-control col-xs-11"}}
+  </div>
+
+  <span id="cardNumberInfo" class="glyphicon glyphicon-info-sign realex-info col-xs-1" aria-hidden="true" data-toggle="tooltip" data-placement="right" data-title="4263970000005262 (00 - Successful)
+    4000120000001154 (101 - Declined)
+    4000130000001724 (102 - Referral B)
+    4000160000004147 (103 - Referral A)
+    4009830000001985 (200 - Comms Error)
+    5425230000004415 (00 - Successful)
+    5114610000004778 (101 - Declined)
+    5114630000009791 (102 - Referral B)
+    5121220000006921 (103 - Referral A)
+    5135020000005871 (200 - Comms Error)
+    374101000000608 (00 - Successful)
+    375425000003 (101 - Declined)
+    375425000000907 (102 - Referral B)
+    343452000000306 (103 - Referral A)
+    372349000000852 (200 - Comms Error)">
+  </span>
+
+  <div class="col-sm-5 form-group">
+    <label class="control-label">Security Code</label>
+    {{input-credit-card-cvc cvc=cvc class="form-control"}}
+  </div>
+
+  <div class="col-sm-5 form-group">
+    <label class="control-label">Expiration</label>
+    {{input-credit-card-expiration month=month year=year class="form-control"}}
+  </div>
+
+  <div class="col-sm-5 form-group">
+    <label for="total" class="control-label">Total</label>
+    {{input id="total" value=total class="form-control" step="0.01" type="number" focus-out="pad_totals"}}
+  </div>
+  <span id="total-info" class="glyphicon glyphicon-info-sign realex-info col-xs-2 col-xs-offset-5" aria-hidden="true" data-toggle="tooltip" data-placement="right" data-title="Enter any amount in this field. Realex’s test system ignores the test amount."></span>
+
+  <div class="col-sm-12">
+  </div>
+
+  <div class="col-sm-5">
+    <div class="dropdown">
+      <label for="currency-selection" class="control-label">Currency</label>
+      <button id="currency-selection" class="btn btn-primary dropdown-toggle form-control" data-toggle="dropdown" value="{{currency}}">{{currency}} <span class="caret"></span></button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a {{action 'change_currency' 'EUR'}}>EUR</a></li>
+        <li><a {{action 'change_currency' 'GBP'}}>GBP</a></li>
+        <li><a {{action 'change_currency' 'USD'}}>USD</a></li>
+        <li><a {{action 'change_currency' 'RUB'}}>RUB</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="col-sm-5 form-group">
+    <label for="total" class="control-label">Converted Total</label>
+    {{input id="convertedTotal" class="form-control" disabled="true" value=converted_total}}
+  </div>
+
+  <div class="col-sm-10">
+    <button class="btn btn-primary btn-block" {{action (action submitPayment)}} disabled="{{if isValid "" "true"}}">Put a safe lock here</button>
+  </div>
+</div>
