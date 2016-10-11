@@ -1,0 +1,71 @@
+/**
+ * Styling and colors for the apps dark theme
+ */
+
+/**
+ * Colors
+ */
+
+$dark: #364156;
+
+$body-bg: #FEFEFE;
+
+$brand-primary: #28648C;
+$brand-secondary: #FFAC00;
+$brand-success: #a1e5ab;
+$brand-danger: #bc4b51;
+$brand-info: #779ECB;
+$brand-warning: #f4e285;
+
+$text-light: #FAFAFA;
+$text-gray: #CDCDCD;
+$text-dark: #4A4A4A;
+$text-color: $text-dark;
+
+$state-success-text: $text-light;
+$state-info-text: $text-light;
+$state-warning-text: $text-light;
+$state-danger-text: $text-light;
+
+$state-success-bg: $brand-success;
+$state-info-bg: $brand-info;
+$state-warning-bg: $brand-warning;
+$state-danger-bg: $brand-danger;
+
+$state-success-border: $brand-success;
+$state-info-border: $brand-info;
+$state-warning-border: $brand-warning;
+$state-danger-border: $brand-danger;
+
+$border-light: #FAFAFA;
+$border-gray: #CDCDCD;
+
+/**
+ * Navbar Component
+ */
+$navbar-default-bg: $brand-primary;
+$navbar-default-link-color: $text-light;
+$navbar-default-link-hover-color: $text-light;
+
+/**
+ * Buttons
+ */
+$btn-primary-color: $text-light;
+$btn-info-color: $text-light;
+$btn-success-color: $text-light;
+$btn-warning-color: $text-light;
+$btn-danger-color: $text-light;
+
+$btn-primary-color-bg: $brand-primary;
+$btn-info-color-bg: $brand-info;
+$btn-success-color-bg: $brand-success;
+$btn-warning-color-bg: $brand-warning;
+$btn-danger-color-bg: $brand-danger;
+
+/**
+ *  Links
+ */
+
+$link-color: $brand-primary;
+$link-hover-color: $brand-info;
+$link-hover-decoration: none;
