@@ -10,6 +10,8 @@ export default Ember.Controller.extend({
   cvc: "222",
   total: "10.00",
   currency: "EUR",
+  api: "realex",
+  responses: [],
 
   products: [{
       name: 'Product 1',
@@ -22,13 +24,29 @@ export default Ember.Controller.extend({
       price: 55.00
     }],
 
+  create_response(raw_xml) {
+    let xml = Ember.$(Ember.$.parseXML(raw_xml));
+    var xml_string = (new XMLSerializer()).serializeToString(Ember.$.parseXML(raw_xml));
+
+    let response = {
+      result: xml.find('result').text(),
+      orderid: xml.find('orderid').text(),
+      message: xml.find('message').text(),
+      batchid: xml.find('batchid').text(),
+      authcode: xml.find('authcode').text(),
+      xml: xml_string
+    };
+
+   this.get('responses').pushObject(response);
+  },
+
   actions: {
     open_side_menu: function() {
       if (this.get('sideMenu.isClosed')) {
         this.get('sideMenu').open();
       }
 
-      Ember.$(".sideways.tabs-right").css('right','38%');
+      Ember.$(".sideways.tabs-right").css('right','33%');
     },
 
     close_side_menu: function() {
@@ -54,10 +72,10 @@ export default Ember.Controller.extend({
           total: this.get('total'),
           currency: this.get('currency')
         }
-      }).done(function(res) {
+      }).done((res) => {
         // Create the new response item
-        // createResponse(res);
-      }).fail(function(err) {
+        this.create_response(res);
+      }).fail(function() {
         // createFunctionalResponse('timeout');
       });
     }

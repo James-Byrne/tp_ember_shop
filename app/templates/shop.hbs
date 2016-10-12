@@ -1,4 +1,4 @@
-<div class="container">
+{{!-- <div class="container">
   <div class="row">
     <div class="col-xs-9">
       {{#each products as |product index|}}
@@ -10,7 +10,7 @@
       {{show-cart}}
     </div>
   </div>
-</div>
+</div> --}}
 
 <div id="payment-section" class="payment-section col-xs-6 col-xs-offset-2">
   <div class="container">
@@ -24,6 +24,7 @@
         cvc=cvc
         total=total
         currency=currency
+        api=api
         submitPayment=(action "submitPayment")
         add_card=add_card}}
       </div>
@@ -35,16 +36,16 @@
   <li class="active"><a {{action "open_side_menu"}} href="#api-requests" data-toggle="tab">API Requests</a></li>
   <li><a {{action "open_side_menu"}} href="#business-requests" data-toggle="tab">Business</a></li>
 </ul>
-{{#side-menu side="right"}}
+{{#side-menu side="right" width="55%"}}
   <header class="navbar navbar-default">
     <span {{action "close_side_menu"}} class="glyphicon glyphicon-remove pull-right col-xs-12" aria-hidden="true"></span>
   </header>
 
   <div class="tab-content">
 
-    <div class="tab-pane active" id="api-requests">
-      <div class="container">
-        First
+    <div class="tab-pane active responses" id="api-requests">
+      <div class="col-xs-12">
+        {{functional-response responses=responses}}
       </div>
     </div>
 
