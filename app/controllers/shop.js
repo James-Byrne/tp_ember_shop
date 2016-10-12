@@ -8,7 +8,7 @@ export default Ember.Controller.extend({
   month: "10",
   year: "21",
   cvc: "222",
-  total: "10.00",
+  total: "0.00",
   currency: "EUR",
   api: "realex",
   responses: [],
@@ -21,6 +21,15 @@ export default Ember.Controller.extend({
       price: 120.00
     }, {
       name: 'Product 3',
+      price: 55.00
+    }, {
+      name: 'Product 4',
+      price: 100.00
+    }, {
+      name: 'Product 5',
+      price: 120.00
+    }, {
+      name: 'Product 6',
       price: 55.00
     }],
 

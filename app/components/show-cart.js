@@ -64,7 +64,7 @@ export default Ember.Component.extend(ScrollMixin, {
     this.get('cartItems').forEach((obj) => {
       total += parseInt(obj.get('price'));
     });
-    return total;
+    this.set('total', parseFloat(total, 10).toFixed(2));
   }),
 
   actions: {
