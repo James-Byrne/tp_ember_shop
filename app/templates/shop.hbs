@@ -12,10 +12,10 @@
   </div>
 </div>
 
-<div id="payment-section" class="payment-section">
+<div id="payment-section" class="payment-section col-xs-6 col-xs-offset-2">
   <div class="container">
-
     <div class="col-xs-8">
+
       {{credit-card-form
         name=name
         number=number
@@ -28,11 +28,33 @@
         add_card=add_card}}
       </div>
 
-      <div class="col-xs-4">
-        {{payment-responses}}
-      </div>
-
   </div>
 </div>
+
+<ul id="tabs" class="nav nav-tabs tabs-right sideways pull-right">
+  <li class="active"><a {{action "open_side_menu"}} href="#api-requests" data-toggle="tab">API Requests</a></li>
+  <li><a {{action "open_side_menu"}} href="#business-requests" data-toggle="tab">Business</a></li>
+</ul>
+{{#side-menu side="right"}}
+  <header class="navbar navbar-default">
+    <span {{action "close_side_menu"}} class="glyphicon glyphicon-remove pull-right col-xs-12" aria-hidden="true"></span>
+  </header>
+
+  <div class="tab-content">
+
+    <div class="tab-pane active" id="api-requests">
+      <div class="container">
+        First
+      </div>
+    </div>
+
+    <div class="tab-pane" id="business-requests">
+      <div class="container">
+        Second
+      </div>
+    </div>
+
+  </div>
+{{/side-menu}}
 
 {{outlet}}

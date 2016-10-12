@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  sideMenu: Ember.inject.service(),
   // Preset values for the user
   name: "Jamie Jones",
   number: "4111 1111 1111 1111",
@@ -22,9 +23,25 @@ export default Ember.Controller.extend({
     }],
 
   actions: {
+    open_side_menu: function() {
+      if (this.get('sideMenu.isClosed')) {
+        this.get('sideMenu').open();
+      }
+
+      Ember.$(".sideways.tabs-right").css('right','38%');
+    },
+
+    close_side_menu: function() {
+      if (this.get('sideMenu.isOpen')) {
+        this.get('sideMenu').close();
+      }
+
+      Ember.$(".sideways.tabs-right").css('right','-28px');
+    },
+
     submitPayment: function() {
       Ember.$.ajax({
-        url: "http://demo-shop-realex.testingpays.com/api/pay",
+        url: "http://localhost:8001/api/pay",
         type: "POST",
         data: {
           firstName: this.get('name'),
@@ -35,7 +52,7 @@ export default Ember.Controller.extend({
           cvv: this.get('cvc'),
           api: this.get('api'),
           total: this.get('total'),
-          currency: this.get('currencySelection')
+          currency: this.get('currency')
         }
       }).done(function(res) {
         // Create the new response item
