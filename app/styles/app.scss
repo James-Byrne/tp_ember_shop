@@ -29,3 +29,57 @@
 .navbar {
   border-radius: 0;
 }
+
+/* Styling for the checkout page */
+.response-item {
+  background-color: #FAFAFA;
+  border-right: 2px solid #FAFAFA;
+  border-left: 2px solid #FAFAFA;
+  margin: 15px 0;
+  padding: 5px 15px;
+  box-shadow: 0 0 5px #26201E;
+  border-bottom: 0;
+}
+/* Classes added to the response panel */
+.responses {
+  width: 75%;
+}
+.response-panel {
+  height: 101vh;
+  background-color: #FEFEFE;
+  border-left: 2px solid #dddddd;
+  border-right: 2px solid #dddddd
+}
+.success > .panel-default {
+  border-color: #00BF86;
+}
+.success > .panel-default > .panel-heading  {
+  background-color: #2CEFC0;
+  color: #3B6264;
+}
+.success > .panel-default > .panel-heading + .panel-collapse > .panel-body {
+  background-color: #80F5D4;
+  border-color: #80F5D4;
+  color: #3B6264;
+}
+
+.error > .panel-default {
+  border-color: #D92626;
+}
+.error > .panel-default > .panel-heading  {
+  background-color: #EC9393;
+  color: #7A1200;
+}
+.error > .panel-default > .panel-heading + .panel-collapse > .panel-body {
+  background-color: #F2B3B3;
+  border-color: #F2B3B3;
+  color: #7A1200;
+}
+
+.glyphicon {
+  margin-right: 10px;
+  padding: 0;
+}
+.remove-response {
+  float: right;
+}
