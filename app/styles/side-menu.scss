@@ -5,8 +5,19 @@
   transition: transform 0s ease-out !important;
   -moz-transition: transform 0s ease-in-out; /* FF 4 */
   -webkit-transition: transform 0s ease-in-out; /* Safari & Chrome */
-}
 
+  -webkit-box-shadow: -2px 0px 1px 0px #28648c;
+  -moz-box-shadow: -2px 0px 1px 0px #28648c;
+  box-shadow: -2px 0px 1px 0px #28648c;
+}
+.side-menu-navbar {
+  .glyphicon-remove:before {
+    float: right;
+    font-size: 18px;
+    color: $text-light;
+    padding: 5px;
+  }
+}
 /*!
  * bootstrap-vertical-tabs - v1.2.1
  * https://dbtek.github.io/bootstrap-vertical-tabs
@@ -61,7 +72,7 @@
   padding-top: 50px;
   overflow: hidden;
   border: none;
-  position: fixed;
+  // position: fixed;
 }
 .sideways>li {
   height: 20px;
@@ -96,14 +107,4 @@
   -ms-transform: rotate(-90deg);
   -o-transform: rotate(-90deg);
   transform: rotate(-90deg);
-}
-
-// Glyphicon stuff
-.glyphicon {
-  line-height: 45px;
-}
-.glyphicon-remove:before {
-  color: white;
-  margin-left: 68%;
-  font-size: 25px;
 }

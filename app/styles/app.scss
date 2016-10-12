@@ -4,11 +4,15 @@
 @import "ember-side-menu";
 @import "side-menu";
 
+body {
+  min-height: 150vh;
+}
+
 .product-container {
   width: 247px;
   padding: 0;
   margin: 30px 10px;
-  border: 1px solid #EBEAEA;
+  border: 1px solid rgba(163,163,163,1);
 }
 .product-content {
   padding: 25px 10px;
@@ -16,6 +20,9 @@
 .btn-product {
   border-radius: 0;
   text-align: left;
+  background-color: $brand-primary;
+  color: $text-light;
+  border-top-color: transparent;
 }
 .btn-product:hover {
   color: white;
@@ -31,6 +38,9 @@
 }
 
 /* Styling for the checkout page */
+.payment-section {
+  min-height: 100vh;
+}
 .response-item {
   background-color: #FAFAFA;
   border-right: 2px solid #FAFAFA;
@@ -82,4 +92,7 @@
 }
 .remove-response {
   float: right;
+}
+.glyphicon-remove:before {
+  color: $text-dark;
 }
