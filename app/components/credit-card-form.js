@@ -23,6 +23,10 @@ export default Component.extend({
     // Enable bootstrap tooltips
     Ember.$('[data-toggle="tooltip"]').tooltip();
 
+    Ember.$('#toggle-provider').change(() => {
+      this.set('api', (Ember.$('#toggle-provider').prop('checked')) ? 'realex': 'testingpays');
+    });
+
     this.format_totals();
   }),
 
