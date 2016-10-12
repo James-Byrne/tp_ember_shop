@@ -1,0 +1,29 @@
+{{#each responses as |response|}}
+  <div class="panel-group remove {{if (eq '00' response.result) "success" "error"}}">
+    <div class="panel panel-default">
+
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <span class="glyphicon glyphicon-{{if (eq '00' response.result) "ok" "remove"}}"></span>
+
+          <a href="#{{response.orderid}}" data-toggle='collapse'>Result Code : {{response.result}}</a>
+
+          <span {{action "remove_response"}} class="glyphicon glyphicon-remove"></span>
+        </h4>
+      </div>
+
+      <div id="{{response.orderid}}" class="panel-collapse collapse">
+        <div class="panel-body">
+          <p>Message : {{response.message}}</p>
+          <p>CVN Result : {{response.cvnresult}}</p>
+          <p>Batch ID : {{response.batchid}}</p>
+          <p>Auth Code : {{response.authcode}}</p>
+          <p style="word-wrap:break-word;">
+              {{response.xml}}
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+{{/each}}
