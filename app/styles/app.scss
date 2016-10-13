@@ -105,8 +105,18 @@ body {
   color: $brand-success
 }
 .tooltip {
-  width: 240px;
+  width: 250px;
 }
 .tooltip-inner {
-  max-width: 240px;
+  max-width: 250px;
+}
+
+.pulse {
+  -webkit-animation: pulsate 0.5s ease-out;
+  -webkit-animation-iteration-count: 1;
+  opacity: 1.0
+}
+@-webkit-keyframes pulsate {
+  0% {-webkit-transform: scale(0.1, 0.1); opacity: 0.0;}
+  100% {-webkit-transform: scale(1, 1); opacity: 1.0;}
 }
