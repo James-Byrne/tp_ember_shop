@@ -4,7 +4,7 @@ import ScrollMixin from '../mixins/scrolling';
 export default Ember.Component.extend(ScrollMixin, {
   store: Ember.inject.service(),
 
-  didInsertElement: (function() {
+  didRender: (function() {
     return this._bindScrollingElement();
   }),
 

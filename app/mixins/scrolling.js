@@ -13,7 +13,7 @@ export default Ember.Mixin.create({
     const scrollHandler = this._scrollHandler.bind(this);
     Ember.$(document).bind('touchmove', scrollHandler);
     Ember.$(window).bind('scroll', scrollHandler);
-  }).on('didInsertElement'),
+  }).on('didRender'),
 
   _unbindScrolling: (function() {
     Ember.$(window).unbind('scroll');
