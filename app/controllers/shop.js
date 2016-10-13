@@ -1,7 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  sideMenu: Ember.inject.service(),
+  store: Ember.inject.service('store'),
+  sideMenu: Ember.inject.service('sideMenu'),
+  response_codes: Ember.inject.service('response-codes'),
+
   // Preset values for the user
   name: "Jamie Jones",
   number: "4111 1111 1111 1111",
@@ -12,6 +15,7 @@ export default Ember.Controller.extend({
   currency: "EUR",
   api: "realex",
   responses: [],
+  functionalResponse: {},
 
   products: [{
       name: 'Wheel of Time',
@@ -41,6 +45,44 @@ export default Ember.Controller.extend({
     };
 
    this.get('responses').pushObject(response);
+   this.create_functional_response(xml.find('result').text())
+  },
+
+  create_functional_response(code) {
+    this.set('functionalResponse', this.get('response_codes').get_response_code(code));
+
+  // If we have a response available open the modal
+    if (this.get('functionalResponse')) {
+      Ember.$('#functional-response-modal').modal('show');
+    }
+  },
+
+  checkout() {
+    Ember.$.ajax({
+      url: "http://localhost:8001/api/pay",
+      type: "POST",
+      data: {
+        firstName: this.get('name'),
+        lastName: this.get('name'),
+        cardNumber: this.get('number'),
+        expiryMonth: this.get('month'),
+        expiryYear: this.get('year'),
+        cvv: this.get('cvc'),
+        api: this.get('api'),
+        total: this.get('total'),
+        currency: this.get('currency')
+      }
+    }).done((res) => {
+      // Create the new response item
+      this.create_response(res);
+    }).fail(function() {
+      // createFunctionalResponse('timeout');
+    });
+  },
+
+  retryPurchase() {
+    this.set('total', '1.00');
+    this.checkout();
   },
 
   actions: {
@@ -61,26 +103,32 @@ export default Ember.Controller.extend({
     },
 
     submitPayment: function() {
-      Ember.$.ajax({
-        url: "http://localhost:8001/api/pay",
-        type: "POST",
-        data: {
-          firstName: this.get('name'),
-          lastName: this.get('name'),
-          cardNumber: this.get('number'),
-          expiryMonth: this.get('month'),
-          expiryYear: this.get('year'),
-          cvv: this.get('cvc'),
-          api: this.get('api'),
-          total: this.get('total'),
-          currency: this.get('currency')
-        }
-      }).done((res) => {
-        // Create the new response item
-        this.create_response(res);
-      }).fail(function() {
-        // createFunctionalResponse('timeout');
+      this.checkout();
+    },
+
+    // Highlight the elements passed to the function
+    highlight: function(fields_to_highlight) {
+      let array = fields_to_highlight.split(',');
+
+      // Go through array and highlight the selected fields
+      array.forEach(function(item) {
+        Ember.$(`#${item}`).css('border', '1px solid red');
       });
+    },
+
+    change_currency: function(currency) {
+      Ember.$('#currency-selection').html(currency + ' <span class="caret"></span>');
+
+      // Change the value of the currency field to the selected currency
+      this.set('currency', currency);
+
+      // Re-submit for a success
+      this.retryPurchase();
+    },
+
+    // Re-submit the form ensuring a success message
+    retry: function() {
+      this.retryPurchase();
     }
   }
 });

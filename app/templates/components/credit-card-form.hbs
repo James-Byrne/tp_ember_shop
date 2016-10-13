@@ -36,12 +36,12 @@
 
   <div class="col-sm-5 form-group">
     <label class="control-label">Security Code</label>
-    {{input-credit-card-cvc cvc=cvc class="form-control"}}
+    {{input-credit-card-cvc id="cvv" cvc=cvc class="form-control"}}
   </div>
 
   <div class="col-sm-5 form-group">
     <label class="control-label">Expiration</label>
-    {{input-credit-card-expiration month=month year=year class="form-control"}}
+    {{input-credit-card-expiration id="expiry" month=month year=year class="form-control"}}
   </div>
 
   <div class="col-sm-5 form-group">
@@ -68,7 +68,7 @@
   </div>
 
   <div class="col-sm-5 form-group">
-    <label for="total" class="control-label">Converted Total</label>
+    <label for="convertedTotal" class="control-label">Converted Total</label>
     {{input id="convertedTotal" class="form-control" disabled="true" value=converted_total}}
   </div>
 
