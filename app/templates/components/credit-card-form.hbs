@@ -17,7 +17,7 @@
     {{input-credit-card-number number=number class="form-control col-xs-11"}}
   </div>
 
-  <span id="cardNumberInfo" class="glyphicon glyphicon-info-sign realex-info col-xs-1" aria-hidden="true" data-toggle="tooltip" data-placement="right" data-title="4263970000005262 (00 - Successful)
+  <span id="cardNumberInfo" class="glyphicon glyphicon-info-sign {{if (eq api 'realex') 'realex-info' 'testingpays-info'}} col-xs-1" aria-hidden="true" data-toggle="tooltip" data-placement="right" data-title="4263970000005262 (00 - Successful)
     4000120000001154 (101 - Declined)
     4000130000001724 (102 - Referral B)
     4000160000004147 (103 - Referral A)
@@ -48,7 +48,7 @@
     <label for="total" class="control-label">Total</label>
     {{input id="total" value=total class="form-control" step="0.01" type="number" focus-out="pad_totals"}}
   </div>
-  <span id="total-info" class="glyphicon glyphicon-info-sign realex-info col-xs-2 col-xs-offset-5" aria-hidden="true" data-toggle="tooltip" data-placement="right" data-title="Enter any amount in this field. Realex’s test system ignores the test amount."></span>
+<span id="total-info" class="glyphicon glyphicon-info-sign {{if (eq api 'realex') 'realex-info' 'testingpays-info'}} pull-left" aria-hidden="true" data-toggle="tooltip" data-placement="right" data-title="Enter any amount in this field. Realex’s test system ignores the test amount."></span>
 
   <div class="col-sm-12">
   </div>

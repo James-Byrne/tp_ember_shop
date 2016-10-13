@@ -96,3 +96,17 @@ body {
 .glyphicon-remove:before {
   color: $text-dark;
 }
+
+// Realex/TestingPays colors
+.realex-info {
+  color: $brand-danger;
+}
+.testingpays-info {
+  color: $brand-success
+}
+.tooltip {
+  width: 240px;
+}
+.tooltip-inner {
+  max-width: 240px;
+}
