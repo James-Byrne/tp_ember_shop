@@ -17,21 +17,7 @@
     {{input-credit-card-number number=number class="form-control col-xs-11"}}
   </div>
 
-  <span id="cardNumberInfo" class="glyphicon glyphicon-info-sign {{if (eq api 'realex') 'realex-info' 'testingpays-info'}} col-xs-1" aria-hidden="true" data-toggle="tooltip" data-placement="right" data-title="4263970000005262 (00 - Successful)
-    4000120000001154 (101 - Declined)
-    4000130000001724 (102 - Referral B)
-    4000160000004147 (103 - Referral A)
-    4009830000001985 (200 - Comms Error)
-    5425230000004415 (00 - Successful)
-    5114610000004778 (101 - Declined)
-    5114630000009791 (102 - Referral B)
-    5121220000006921 (103 - Referral A)
-    5135020000005871 (200 - Comms Error)
-    374101000000608 (00 - Successful)
-    375425000003 (101 - Declined)
-    375425000000907 (102 - Referral B)
-    343452000000306 (103 - Referral A)
-    372349000000852 (200 - Comms Error)">
+  <span id="cardNumberInfo" class="glyphicon glyphicon-info-sign pulse {{if (eq api 'realex') 'realex-info' 'testingpays-info'}} col-xs-1" aria-hidden="true" data-toggle="tooltip" data-placement="right" data-title="{{card_number_info}}">
   </span>
 
   <div class="col-sm-5 form-group">
@@ -48,7 +34,7 @@
     <label for="total" class="control-label">Total</label>
     {{input id="total" value=total class="form-control" step="0.01" type="number" focus-out="pad_totals"}}
   </div>
-<span id="total-info" class="glyphicon glyphicon-info-sign {{if (eq api 'realex') 'realex-info' 'testingpays-info'}} pull-left" aria-hidden="true" data-toggle="tooltip" data-placement="right" data-title="Enter any amount in this field. Realex’s test system ignores the test amount."></span>
+  <span id="total-info" class="glyphicon glyphicon-info-sign  pulse {{if (eq api 'realex') 'realex-info' 'testingpays-info'}} pull-left" aria-hidden="true" data-toggle="tooltip" data-placement="right" data-title="{{total_info}}"></span>
 
   <div class="col-sm-12">
   </div>
@@ -73,6 +59,6 @@
   </div>
 
   <div class="col-sm-10">
-    <button class="btn btn-primary btn-block" {{action (action submitPayment)}} disabled="{{if isValid "" "true"}}">Put a safe lock here</button>
+    <button class="btn btn-primary btn-block" {{action (action submitPayment)}} disabled="{{if isValid "" "true"}}" style="line-height: 25px; margin-top:20px;"><span class="glyphicon glyphicon-lock"></span> Pay Safely</button>
   </div>
 </div>

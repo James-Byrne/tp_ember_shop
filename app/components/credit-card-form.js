@@ -19,12 +19,14 @@ export default Component.extend({
   currency: null,
   convertedTotal: 0,
 
-  setup: Ember.on('didInsertElement', function() {
+  setup: Ember.on('didRender', function() {
     // Enable bootstrap tooltips
     Ember.$('[data-toggle="tooltip"]').tooltip();
 
     Ember.$('#toggle-provider').change(() => {
       this.set('api', (Ember.$('#toggle-provider').prop('checked')) ? 'realex': 'testingpays');
+      Ember.$("#cardNumberInfo").attr('data-original-title', this.get('card_number_info'));
+      Ember.$("#total-info").attr('data-original-title', this.get('total_info'));
     });
 
     this.format_totals();
@@ -52,6 +54,51 @@ export default Component.extend({
     }
   }),
 
+  card_number_info: Ember.computed('api', function() {
+    let holder;
+
+    if (this.get('api') === 'realex') {
+      holder = "4263970000005262 (00 - Successful)\
+        4000120000001154 (101 - Declined)\
+        4000130000001724 (102 - Referral B)\
+        4000160000004147 (103 - Referral A)\
+        4009830000001985 (200 - Comms Error)\
+        5425230000004415 (00 - Successful)\
+        5114610000004778 (101 - Declined)\
+        5114630000009791 (102 - Referral B)\
+        5121220000006921 (103 - Referral A)\
+        5135020000005871 (200 - Comms Error)\
+        374101000000608 (00 - Successful)\
+        375425000003 (101 - Declined)\
+        375425000000907 (102 - Referral B)\
+        343452000000306 (103 - Referral A)\
+        372349000000852 (200 - Comms Error)";
+    } else {
+      holder = 'When pointing at the TestingPays Sim, you can use any valid credit number in this field.';
+    }
+
+    return holder;
+  }),
+
+  total_info: Ember.computed('api', function () {
+    let holder;
+
+    if (this.get('api') === 'realex') {
+      holder = "Enter any amount in this field. Enter any amount in this field. Realex’s test system ignores the amount aslong as it is over 0.50"
+    } else {
+      holder = "When pointing at TestingPays Sim, use the decimal part of the amount to get back the Realex API response you  want to test.\
+Examples:\
+\
+123.00 (00 - Successful)\
+52.10 (101_declined_bank)\
+400.12 (103_card_stolen)\
+76.21  (205_bank_comm)\
+45.22 (507_currency)\
+670.16 (603_error)"
+    }
+
+    return holder;
+  }),
   /**
    *
    * Validation checks
