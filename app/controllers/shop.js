@@ -8,29 +8,23 @@ export default Ember.Controller.extend({
   month: "10",
   year: "21",
   cvc: "222",
-  total: "0.00",
+  total: 0.00,
   currency: "EUR",
   api: "realex",
   responses: [],
 
   products: [{
-      name: 'Product 1',
-      price: 100.00
+      name: 'Wheel of Time',
+      price: 10.12,
+      image: "http://images.mobilism.org/?dm=3NHQ"
     }, {
-      name: 'Product 2',
-      price: 120.00
+      name: 'Excession',
+      price: 12.15,
+      image: "http://www.iain-banks.net/lib/Excession.jpg"
     }, {
-      name: 'Product 3',
-      price: 55.00
-    }, {
-      name: 'Product 4',
-      price: 100.00
-    }, {
-      name: 'Product 5',
-      price: 120.00
-    }, {
-      name: 'Product 6',
-      price: 55.00
+      name: 'Wise Mans Fear',
+      price: 8.85,
+      image: "https://upload.wikimedia.org/wikipedia/en/8/81/The_Wise_Man's_Fear_UK_cover.jpg"
     }],
 
   create_response(raw_xml) {
