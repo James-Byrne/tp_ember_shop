@@ -35,8 +35,8 @@ export default Ember.Component.extend({
     submitPayment: function() {
       // TODO : submit a payment to the correct processor
       Ember.$.ajax({
-        url: "http://demo-shop-realex.testingpays.com/api/pay",
-        type: "POST",
+        url: 'http://demo-shop-realex.testingpays.com/api/pay',
+        type: 'POST',
         data: {
           firstName: this.get('name'),
           lastName: this.get('name'),

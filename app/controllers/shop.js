@@ -6,30 +6,30 @@ export default Ember.Controller.extend({
   response_codes: Ember.inject.service('response-codes'),
 
   // Preset values for the user
-  name: "Jamie Jones",
-  number: "4111 1111 1111 1111",
-  month: "10",
-  year: "21",
-  cvc: "222",
+  name: 'Jamie Jones',
+  number: '4111 1111 1111 1111',
+  month: '10',
+  year: '21',
+  cvc: '222',
   total: 0.00,
-  currency: "EUR",
-  api: "realex",
+  currency: 'EUR',
+  api: 'realex',
   responses: [],
   functionalResponse: {},
 
   products: [{
-      name: 'Wheel of Time',
-      price: 10.12,
-      image: "http://images.mobilism.org/?dm=3NHQ"
-    }, {
-      name: 'Excession',
-      price: 12.15,
-      image: "http://www.iain-banks.net/lib/Excession.jpg"
-    }, {
-      name: 'Wise Mans Fear',
-      price: 8.85,
-      image: "https://upload.wikimedia.org/wikipedia/en/8/81/The_Wise_Man's_Fear_UK_cover.jpg"
-    }],
+    name: 'Wheel of Time',
+    price: 10.12,
+    image: 'http://images.mobilism.org/?dm=3NHQ'
+  }, {
+    name: 'Excession',
+    price: 12.15,
+    image: 'http://www.iain-banks.net/lib/Excession.jpg'
+  }, {
+    name: 'Wise Mans Fear',
+    price: 8.85,
+    image: 'https://upload.wikimedia.org/wikipedia/en/8/81/The_Wise_Man\'s_Fear_UK_cover.jpg'
+  }],
 
   create_response(raw_xml) {
     let xml = Ember.$(Ember.$.parseXML(raw_xml));
@@ -44,8 +44,8 @@ export default Ember.Controller.extend({
       xml: xml_string
     };
 
-   this.get('responses').pushObject(response);
-   this.create_functional_response(xml.find('result').text())
+    this.get('responses').pushObject(response);
+    this.create_functional_response(xml.find('result').text());
   },
 
   create_functional_response(code) {
@@ -59,8 +59,8 @@ export default Ember.Controller.extend({
 
   checkout() {
     Ember.$.ajax({
-      url: "http://localhost:8001/api/pay",
-      type: "POST",
+      url: 'http://localhost:8001/api/pay',
+      type: 'POST',
       data: {
         firstName: this.get('name'),
         lastName: this.get('name'),
@@ -91,7 +91,7 @@ export default Ember.Controller.extend({
         this.get('sideMenu').open();
       }
 
-      Ember.$(".sideways.tabs-right").css('right','33%');
+      Ember.$('.sideways.tabs-right').css('right','33%');
     },
 
     close_side_menu: function() {
@@ -99,7 +99,7 @@ export default Ember.Controller.extend({
         this.get('sideMenu').close();
       }
 
-      Ember.$(".sideways.tabs-right").css('right','-28px');
+      Ember.$('.sideways.tabs-right').css('right','-28px');
     },
 
     submitPayment: function() {
@@ -117,6 +117,7 @@ export default Ember.Controller.extend({
     },
 
     change_currency: function(currency) {
+      // eslint-disable-next-line
       Ember.$('#currency-selection').html(currency + ' <span class="caret"></span>');
 
       // Change the value of the currency field to the selected currency

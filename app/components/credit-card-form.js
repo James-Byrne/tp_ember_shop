@@ -2,7 +2,7 @@ import Ember from 'ember';
 import Validations from 'ember-credit-cards/utils/validations';
 import Cards from 'ember-credit-cards/utils/cards';
 
-const {Component, observer, computed} = Ember;
+const {Component, computed} = Ember;
 
 /**
  * The below code is the same as the code found within the ember-credit-cards
@@ -21,12 +21,13 @@ export default Component.extend({
 
   setup: Ember.on('didRender', function() {
     // Enable bootstrap tooltips
+    // eslint-disable-next-line
     Ember.$('[data-toggle="tooltip"]').tooltip();
 
     Ember.$('#toggle-provider').change(() => {
       this.set('api', (Ember.$('#toggle-provider').prop('checked')) ? 'realex': 'testingpays');
-      Ember.$("#cardNumberInfo").attr('data-original-title', this.get('card_number_info'));
-      Ember.$("#total-info").attr('data-original-title', this.get('total_info'));
+      Ember.$('#cardNumberInfo').attr('data-original-title', this.get('card_number_info'));
+      Ember.$('#total-info').attr('data-original-title', this.get('total_info'));
     });
 
     this.format_totals();
@@ -41,13 +42,13 @@ export default Component.extend({
   // Re-calc the converted total when the total or currency changes
   converted_total: computed('total', 'currency', function() {
     switch (this.get('currency')) {
-      case "USD":
+      case 'USD':
         return this.get('total') * 1.12;
-      case "EUR":
+      case 'EUR':
         return this.get('total');
-      case "GBP":
+      case 'GBP':
         return this.get('total') * 0.9;
-      case "RUB":
+      case 'RUB':
         return this.get('total') * 74.20;
       default:
         return this.get('total');
@@ -58,7 +59,7 @@ export default Component.extend({
     let holder;
 
     if (this.get('api') === 'realex') {
-      holder = "4263970000005262 (00 - Successful)\
+      holder = '4263970000005262 (00 - Successful)\
         4000120000001154 (101 - Declined)\
         4000130000001724 (102 - Referral B)\
         4000160000004147 (103 - Referral A)\
@@ -72,7 +73,7 @@ export default Component.extend({
         375425000003 (101 - Declined)\
         375425000000907 (102 - Referral B)\
         343452000000306 (103 - Referral A)\
-        372349000000852 (200 - Comms Error)";
+        372349000000852 (200 - Comms Error)';
     } else {
       holder = 'When pointing at the TestingPays Sim, you can use any valid credit number in this field.';
     }
@@ -84,9 +85,9 @@ export default Component.extend({
     let holder;
 
     if (this.get('api') === 'realex') {
-      holder = "Enter any amount in this field. Enter any amount in this field. Realex’s test system ignores the amount aslong as it is over 0.50"
+      holder = 'Enter any amount in this field. Enter any amount in this field. Realex’s test system ignores the amount aslong as it is over 0.50';
     } else {
-      holder = "When pointing at TestingPays Sim, use the decimal part of the amount to get back the Realex API response you  want to test.\
+      holder = 'When pointing at TestingPays Sim, use the decimal part of the amount to get back the Realex API response you  want to test.\
 Examples:\
 \
 123.00 (00 - Successful)\
@@ -94,7 +95,7 @@ Examples:\
 400.12 (103_card_stolen)\
 76.21  (205_bank_comm)\
 45.22 (507_currency)\
-670.16 (603_error)"
+670.16 (603_error)';
     }
 
     return holder;
@@ -138,6 +139,7 @@ Examples:\
 
     change_currency: function(currency) {
       // Change the currency in the dropdown menu
+      // eslint-disable-next-line
       Ember.$('#currency-selection').html(currency + ' <span class="caret"></span>');
 
       // Pass the change up to the payment-form component
