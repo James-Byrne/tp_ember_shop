@@ -2,24 +2,12 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   store: Ember.inject.service('store'),
+  total: '0.00',
 
   currencySelection: 'EUR',
   disabled: true,
 
-  cartItems: Ember.computed('store.product.@each', function() {
-    return this.get('store').peekAll('product');
-  }),
-
-  total: Ember.computed('cartItems.@each', function() {
-    let total = 0;
-    this.get('cartItems').forEach((obj) => {
-      total += parseInt(obj.get('price'));
-    });
-    return total;
-  }),
-
   convertedTotal: Ember.computed('currencySelection', 'total', function() {
-    // TODO : Update the currency and total
     return this.get('total');
   }),
 
