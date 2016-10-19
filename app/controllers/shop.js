@@ -4,6 +4,7 @@ const { Controller, computed, $, inject } = Ember;
 
 export default Controller.extend({
   response_codes: inject.service('response-codes'),
+  tour_bot: inject.service('tour-bot'),
 
   // Preset values for the user
   name: 'Jamie Jones',
@@ -16,6 +17,15 @@ export default Controller.extend({
   api: 'realex',
   responses: [],
   functionalResponse: {},
+
+  init() {
+    this._super(...arguments);
+
+    // After three seconds show the drawer to the user
+    setTimeout(function() {
+      $('.response-drawer').css('right', 0);
+    }, 3000);
+  },
 
   currentApiText: computed('api', function() {
     return (this.get('api') === 'realex') ? 'Realex Test API' : 'TestingPays Sim';
@@ -78,6 +88,9 @@ export default Controller.extend({
   actions: {
     swapAPI: function() {
       this.set('api', (this.get('api') === 'realex') ? 'testingpays' : 'realex');
+
+      // Let tour bot know that the api has changed
+      this.get('tour_bot').changed_api(this.get('api'));
     },
 
     openMenu: function() {
