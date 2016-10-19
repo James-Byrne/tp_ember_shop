@@ -4,29 +4,6 @@
 @import "ember-side-menu";
 @import "side-menu";
 
-body {
-  min-height: 150vh;
-}
-
-.product-container {
-  width: 247px;
-  padding: 0;
-  margin: 30px 10px;
-  border: 1px solid rgba(163,163,163,1);
-}
-.product-content {
-  padding: 25px 10px;
-}
-.btn-product {
-  border-radius: 0;
-  text-align: left;
-  background-color: $brand-primary;
-  color: $text-light;
-  border-top-color: transparent;
-}
-.btn-product:hover {
-  color: white;
-}
 .panel {
   margin-top: 30px;
 }
@@ -109,14 +86,4 @@ body {
 }
 .tooltip-inner {
   max-width: 250px;
-}
-
-.pulse {
-  -webkit-animation: pulsate 0.5s ease-out;
-  -webkit-animation-iteration-count: 1;
-  opacity: 1.0
-}
-@-webkit-keyframes pulsate {
-  0% {-webkit-transform: scale(0.1, 0.1); opacity: 0.0;}
-  100% {-webkit-transform: scale(1, 1); opacity: 1.0;}
 }
