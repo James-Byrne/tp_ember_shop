@@ -8,7 +8,7 @@
     {{input-credit-card-number number=number class="form-control col-xs-11"}}
   </div>
 
-  <span id="cardNumberInfo" class="glyphicon glyphicon-info-sign pulse {{if (eq api 'realex') 'realex-info' 'testingpays-info'}} col-xs-1" aria-hidden="true" data-toggle="tooltip" data-placement="right" data-title="{{card_number_info}}">
+  <span id="cardNumberInfo" class="glyphicon glyphicon-info-sign {{api}} col-xs-1" aria-hidden="true" data-toggle="tooltip" data-placement="right" data-title="{{card_number_info}}">
   </span>
 
   <div class="col-sm-5 form-group">
@@ -25,7 +25,7 @@
     <label for="total" class="control-label">Total</label>
     {{input id="total" value=total class="form-control" step="0.01" type="number" focus-out="pad_totals"}}
   </div>
-  <span id="total-info" class="glyphicon glyphicon-info-sign  pulse {{if (eq api 'realex') 'realex-info' 'testingpays-info'}} pull-left" aria-hidden="true" data-toggle="tooltip" data-placement="right" data-title="{{total_info}}"></span>
+  <span id="total-info" class="glyphicon glyphicon-info-sign {{api}} pull-left" aria-hidden="true" data-toggle="tooltip" data-placement="right" data-title="{{total_info}}"></span>
 
   <div class="col-sm-12">
   </div>
