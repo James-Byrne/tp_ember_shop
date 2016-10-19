@@ -4,11 +4,7 @@
 
       <div class="panel-heading">
         <h4 class="panel-title">
-          <span class="glyphicon glyphicon-{{if (eq '00' response.result) "ok" "remove"}} pull-left"></span>
-
           <a href="#{{response.orderid}}" data-toggle='collapse'>Result Code : {{response.result}}</a>
-
-          <span {{action "remove_response" response}} class="glyphicon glyphicon-remove pull-right"></span>
         </h4>
       </div>
 
