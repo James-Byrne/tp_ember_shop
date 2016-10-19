@@ -4,6 +4,23 @@
 @import "ember-side-menu";
 @import "side-menu";
 @import "response-items.scss";
+@import "credit-card-form.scss";
+@import "processors.scss";
+
+.content-container {
+  @extend .container;
+  margin-left: 0;
+  margin-right: 0;
+  width: 80%;
+  margin-bottom: 55px;
+}
+
+// The last content container should create a large bottom marin
+// so the user can scroll to centre the last piece of content on
+// their screens
+.content-container:last-child {
+  margin-bottom: 155px;
+}
 
 .panel {
   margin-top: 30px;
@@ -28,14 +45,6 @@
 .tooltip-inner {
   max-width: 250px;
 }
-
-/**
- * Dividing margin
- */
-.dividing-margin-top {
-  margin-top: 40px;
-}
-
 
 /**
  * Buttons

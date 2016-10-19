@@ -17,19 +17,9 @@ export default Ember.Controller.extend({
   responses: [],
   functionalResponse: {},
 
-  products: [{
-    name: 'Wheel of Time',
-    price: 10.12,
-    image: 'http://images.mobilism.org/?dm=3NHQ'
-  }, {
-    name: 'Excession',
-    price: 12.15,
-    image: 'http://www.iain-banks.net/lib/Excession.jpg'
-  }, {
-    name: 'Wise Mans Fear',
-    price: 8.85,
-    image: 'https://upload.wikimedia.org/wikipedia/en/8/81/The_Wise_Man\'s_Fear_UK_cover.jpg'
-  }],
+  currentApiText: Ember.computed('api', function() {
+    return (this.get('api') === 'realex') ? 'Realex Test API' : 'TestingPays Sim';
+  }),
 
   create_response(raw_xml) {
     let xml = Ember.$(Ember.$.parseXML(raw_xml));
@@ -86,6 +76,10 @@ export default Ember.Controller.extend({
   },
 
   actions: {
+    swapAPI: function() {
+      this.set('api', (this.get('api') === 'realex') ? 'testingpays' : 'realex');
+    },
+
     open_side_menu: function() {
       if (this.get('sideMenu.isClosed')) {
         this.get('sideMenu').open();
