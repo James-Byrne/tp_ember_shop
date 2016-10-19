@@ -1,0 +1,21 @@
+// Custom stylings for the different APIs
+
+// Realex
+.realex {
+  color: $brand-secondary !important;
+}
+
+.btn-realex {
+  @extend .realex;
+  border-color: $brand-secondary !important;
+}
+
+// TestingPays
+.testingpays {
+  color: $brand-success !important;
+}
+
+.btn-testingpays {
+  @extend .testingpays;
+  border-color: $brand-success !important;
+}
