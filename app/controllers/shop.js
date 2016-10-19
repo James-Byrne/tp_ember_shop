@@ -1,11 +1,6 @@
 import Ember from 'ember';
 
-const {
-  Controller,
-  computed,
-  $,
-  inject,
-} = Ember;
+const { Controller, computed, $, inject } = Ember;
 
 export default Controller.extend({
   response_codes: inject.service('response-codes'),
@@ -27,8 +22,8 @@ export default Controller.extend({
   }),
 
   create_response(raw_xml) {
-    let xml = Ember.$(Ember.$.parseXML(raw_xml));
-    var xml_string = (new XMLSerializer()).serializeToString(Ember.$.parseXML(raw_xml));
+    let xml = $($.parseXML(raw_xml));
+    var xml_string = (new XMLSerializer()).serializeToString($.parseXML(raw_xml));
 
     let response = {
       result: xml.find('result').text(),
@@ -48,7 +43,7 @@ export default Controller.extend({
 
   // If we have a response available open the modal
     if (this.get('functionalResponse')) {
-      Ember.$('#functional-response-modal').modal('show');
+      $('#functional-response-modal').modal('show');
     }
   },
 
@@ -103,13 +98,13 @@ export default Controller.extend({
 
       // Go through array and highlight the selected fields
       array.forEach(function(item) {
-        Ember.$(`#${item}`).css('border', '1px solid red');
+        $(`#${item}`).css('border', '1px solid red');
       });
     },
 
     change_currency: function(currency) {
       // eslint-disable-next-line
-      Ember.$('#currency-selection').html(currency + ' <span class="caret"></span>');
+      $('#currency-selection').html(currency + ' <span class="caret"></span>');
 
       // Change the value of the currency field to the selected currency
       this.set('currency', currency);
