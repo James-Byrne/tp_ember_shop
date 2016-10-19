@@ -1,9 +1,14 @@
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
-  store: Ember.inject.service('store'),
-  sideMenu: Ember.inject.service('sideMenu'),
-  response_codes: Ember.inject.service('response-codes'),
+const {
+  Controller,
+  computed,
+  $,
+  inject,
+} = Ember;
+
+export default Controller.extend({
+  response_codes: inject.service('response-codes'),
 
   // Preset values for the user
   name: 'Jamie Jones',
@@ -17,7 +22,7 @@ export default Ember.Controller.extend({
   responses: [],
   functionalResponse: {},
 
-  currentApiText: Ember.computed('api', function() {
+  currentApiText: computed('api', function() {
     return (this.get('api') === 'realex') ? 'Realex Test API' : 'TestingPays Sim';
   }),
 
@@ -48,7 +53,7 @@ export default Ember.Controller.extend({
   },
 
   checkout() {
-    Ember.$.ajax({
+    $.ajax({
       url: 'http://localhost:8001/api/pay',
       type: 'POST',
       data: {
@@ -80,20 +85,12 @@ export default Ember.Controller.extend({
       this.set('api', (this.get('api') === 'realex') ? 'testingpays' : 'realex');
     },
 
-    open_side_menu: function() {
-      if (this.get('sideMenu.isClosed')) {
-        this.get('sideMenu').open();
-      }
-
-      Ember.$('.sideways.tabs-right').css('right','33%');
+    openMenu: function() {
+      $('.response-drawer').css('right', 0);
     },
 
-    close_side_menu: function() {
-      if (this.get('sideMenu.isOpen')) {
-        this.get('sideMenu').close();
-      }
-
-      Ember.$('.sideways.tabs-right').css('right','-28px');
+    closeMenu: function() {
+      $('.response-drawer').css('right', -400);
     },
 
     submitPayment: function() {
