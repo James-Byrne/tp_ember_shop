@@ -1,11 +1,13 @@
 // Imports
 @import "dark-theme";
 @import "bootstrap";
+@import "bootstrap-vertical-tabs.scss";
 @import "ember-side-menu";
 @import "side-menu";
 @import "response-items.scss";
 @import "credit-card-form.scss";
 @import "processors.scss";
+@import "response-drawer.scss";
 
 .content-container {
   @extend .container;
