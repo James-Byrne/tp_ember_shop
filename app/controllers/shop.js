@@ -44,6 +44,9 @@ export default Controller.extend({
       xml: xml_string
     };
 
+    // Generate a message from the tour bot
+    this.get('tour_bot').valid_purchase(response);
+
     this.get('responses').pushObject(response);
     this.create_functional_response(xml.find('result').text());
   },
@@ -99,6 +102,14 @@ export default Controller.extend({
 
     closeMenu: function() {
       $('.response-drawer').css('right', -400);
+    },
+
+    card_number_field_focused: function() {
+      this.get('tour_bot').card_number_field_focused();
+    },
+
+    purchase_amount_field_focused: function() {
+      this.get('tour_bot').purchase_amount_field_focused();
     },
 
     submitPayment: function() {

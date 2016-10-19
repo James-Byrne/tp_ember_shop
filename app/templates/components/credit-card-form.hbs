@@ -1,11 +1,11 @@
   <div class="col-sm-10 form-group">
-    <label class="control-label">Name</label>
+    <label class="control-label">Card Holder Name</label>
     {{input type="text" value=name class="form-control"}}
   </div>
 
   <div class="col-sm-10 form-group">
     <label class="control-label">Card Number</label>
-    {{input-credit-card-number number=number class="form-control col-xs-11"}}
+    {{input-credit-card-number number=number class="form-control col-xs-11" focus-in=attrs.card_number_field_focused }}
   </div>
 
   <span id="cardNumberInfo" class="glyphicon glyphicon-info-sign {{api}} col-xs-1" aria-hidden="true" data-toggle="tooltip" data-placement="right" data-title="{{card_number_info}}">
@@ -23,7 +23,7 @@
 
   <div class="col-sm-5 form-group">
     <label for="total" class="control-label">Total</label>
-    {{input id="total" value=total class="form-control" step="0.01" type="number" focus-out="pad_totals"}}
+    {{input id="total" value=total class="form-control" step="0.01" type="number" focus-out="pad_totals" focusIn=attrs.purchase_amount_field_focused }}
   </div>
   <span id="total-info" class="glyphicon glyphicon-info-sign {{api}} pull-left" aria-hidden="true" data-toggle="tooltip" data-placement="right" data-title="{{total_info}}"></span>
 

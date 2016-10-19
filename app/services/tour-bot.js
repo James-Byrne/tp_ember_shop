@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Service.extend({
   events: null,
   tour_bot_responses: [],
-  current_api: 'realex',      // TODO make sure this is consistent
+  current_api: 'realex',
 
   // TODO : MAKE SURE THE LINKS BELOW WORK CORRECTLY
 
@@ -87,7 +87,7 @@ export default Ember.Service.extend({
     this.get('events').trigger('purchase_amount_field_focused');
   },
 
-  valid_purchase() {
-    this.get('events').trigger(`valid_purchase_${this.get('current_api')}`);
+  valid_purchase(response) {
+    this.get('events').trigger(`valid_purchase_${this.get('current_api')}`, response);
   }
 });
