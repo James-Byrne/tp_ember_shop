@@ -1,1 +1,8 @@
+{{#each responses as |response|}}
+  <div class="panel panel-default">
+    <div class="panel-heading background-color-{{response.api}}">{{response.api}}</div>
+    <div class="panel-body">{{response.message}}</div>
+  </div>
+{{/each}}
+
 {{yield}}
