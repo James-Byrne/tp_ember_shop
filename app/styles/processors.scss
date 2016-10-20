@@ -17,6 +17,12 @@ $testingpays: $brand-primary;
   color: $text-light !important;
   background-color: $realex !important;
 }
+.badge-realex {
+  @extend .badge;
+  margin-left: 20px;
+  color: $text-light !important;
+  background-color: $realex !important;
+}
 
 // TestingPays
 .testingpays {
@@ -29,6 +35,13 @@ $testingpays: $brand-primary;
 }
 
 .background-color-testingpays {
+  color: $text-light !important;
+  background-color: $testingpays !important;
+}
+
+.badge-testingpays {
+  @extend .badge;
+  margin-left: 20px;
   color: $text-light !important;
   background-color: $testingpays !important;
 }
