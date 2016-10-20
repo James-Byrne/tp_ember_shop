@@ -9,7 +9,7 @@
   <div class="content-container">
     <h4>Currently pointing at : <span class="{{api}}">{{currentApiText}}</span></h4>
     <br>
-    <button {{action "swapAPI"}} class="btn btn-clear-primary btn-lg btn-{{api}}">Switch to {{api}}</button>
+    <button {{action "swapAPI"}} class="btn btn-clear-primary btn-lg btn-{{if (eq api 'realex') 'testingpays' 'realex'}}">Switch to {{if (eq api 'realex') 'TestingPays' 'Realex'}}</button>
   </div>
 
   <h3>Step 2 : Complete the checkout form &amp; checkout</h3>
