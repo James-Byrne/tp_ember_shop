@@ -2,7 +2,7 @@ import Ember from 'ember';
 import Validations from 'ember-credit-cards/utils/validations';
 import Cards from 'ember-credit-cards/utils/cards';
 
-const {Component, computed} = Ember;
+const { Component, computed, $ } = Ember;
 
 /**
  * The below code is the same as the code found within the ember-credit-cards
@@ -19,19 +19,22 @@ export default Component.extend({
   currency: null,
   convertedTotal: 0,
 
-  setup: Ember.on('didRender', function() {
-    // Enable bootstrap tooltips
-    // eslint-disable-next-line
-    Ember.$('[data-toggle="tooltip"]').tooltip();
+  init() {
+    this._super(...arguments);
 
-    Ember.$('#toggle-provider').change(() => {
-      this.set('api', (Ember.$('#toggle-provider').prop('checked')) ? 'realex': 'testingpays');
-      Ember.$('#cardNumberInfo').attr('data-original-title', this.get('card_number_info'));
-      Ember.$('#total-info').attr('data-original-title', this.get('total_info'));
-    });
-
+    // Format the totals when entering
     this.format_totals();
-  }),
+  },
+
+  didRender() {
+    this._super(...arguments);
+
+    // Enable bootstrap tooltips
+    $('[data-toggle="tooltip"]').tooltip();
+
+    $('#cardNumberInfo').attr('data-original-title', this.get('card_number_info'));
+    $('#total-info').attr('data-original-title', this.get('total_info'));
+  },
 
   // Ensure that the total and converted are padded out to the format of : 10.00
   format_totals() {
@@ -55,7 +58,7 @@ export default Component.extend({
     }
   }),
 
-  card_number_info: Ember.computed('api', function() {
+  card_number_info: computed('api', function() {
     let holder;
 
     if (this.get('api') === 'realex') {
@@ -81,7 +84,7 @@ export default Component.extend({
     return holder;
   }),
 
-  total_info: Ember.computed('api', function () {
+  total_info: computed('api', function () {
     let holder;
 
     if (this.get('api') === 'realex') {
@@ -139,8 +142,7 @@ Examples:\
 
     change_currency: function(currency) {
       // Change the currency in the dropdown menu
-      // eslint-disable-next-line
-      Ember.$('#currency-selection').html(currency + ' <span class="caret"></span>');
+      $('#currency-selection').html(currency + ' <span class="caret"></span>');
 
       // Pass the change up to the payment-form component
       this.set('currency', currency);
