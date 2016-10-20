@@ -7,6 +7,11 @@ module.exports = function(environment) {
     baseURL: '/',
     locationType: 'auto',
     EmberENV: {
+      EXTEND_PROTOTYPES: {
+        Date: false,
+        Array: true
+      },
+
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
@@ -19,6 +24,7 @@ module.exports = function(environment) {
     }
   };
 
+  /* eslint-disable */
   ENV.contentSecurityPolicy = {
     'default-src': "'self'",
     'script-src': "'self' 'unsafe-eval'",
@@ -27,7 +33,8 @@ module.exports = function(environment) {
     'img-src': "'self' http://localhost:3000",
     'style-src': "'self' 'unsafe-inline'",
     'media-src': "'self'"
-  }
+  };
+  /* eslint-enable */
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
@@ -50,7 +57,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+    //
   }
 
   return ENV;

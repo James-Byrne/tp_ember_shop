@@ -1,9 +1,10 @@
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
-  store: Ember.inject.service('store'),
-  sideMenu: Ember.inject.service('sideMenu'),
-  response_codes: Ember.inject.service('response-codes'),
+const { Controller, computed, $, inject } = Ember;
+
+export default Controller.extend({
+  response_codes: inject.service('response-codes'),
+  tour_bot: inject.service('tour-bot'),
 
   // Preset values for the user
   name: 'Jamie Jones',
@@ -17,13 +18,22 @@ export default Ember.Controller.extend({
   responses: [],
   functionalResponse: {},
 
-  currentApiText: Ember.computed('api', function() {
+  init() {
+    this._super(...arguments);
+
+    // After three seconds show the drawer to the user
+    setTimeout(function() {
+      $('.response-drawer').css('right', 0);
+    }, 3000);
+  },
+
+  currentApiText: computed('api', function() {
     return (this.get('api') === 'realex') ? 'Realex Test API' : 'TestingPays Sim';
   }),
 
   create_response(raw_xml) {
-    let xml = Ember.$(Ember.$.parseXML(raw_xml));
-    var xml_string = (new XMLSerializer()).serializeToString(Ember.$.parseXML(raw_xml));
+    let xml = $($.parseXML(raw_xml));
+    var xml_string = (new XMLSerializer()).serializeToString($.parseXML(raw_xml));
 
     let response = {
       result: xml.find('result').text(),
@@ -34,6 +44,9 @@ export default Ember.Controller.extend({
       xml: xml_string
     };
 
+    // Generate a message from the tour bot
+    this.get('tour_bot').valid_purchase(response);
+
     this.get('responses').pushObject(response);
     this.create_functional_response(xml.find('result').text());
   },
@@ -43,12 +56,12 @@ export default Ember.Controller.extend({
 
   // If we have a response available open the modal
     if (this.get('functionalResponse')) {
-      Ember.$('#functional-response-modal').modal('show');
+      $('#functional-response-modal').modal('show');
     }
   },
 
   checkout() {
-    Ember.$.ajax({
+    $.ajax({
       url: 'http://localhost:8001/api/pay',
       type: 'POST',
       data: {
@@ -78,22 +91,25 @@ export default Ember.Controller.extend({
   actions: {
     swapAPI: function() {
       this.set('api', (this.get('api') === 'realex') ? 'testingpays' : 'realex');
+
+      // Let tour bot know that the api has changed
+      this.get('tour_bot').changed_api(this.get('api'));
     },
 
-    open_side_menu: function() {
-      if (this.get('sideMenu.isClosed')) {
-        this.get('sideMenu').open();
-      }
-
-      Ember.$('.sideways.tabs-right').css('right','33%');
+    openMenu: function() {
+      $('.response-drawer').css('right', 0);
     },
 
-    close_side_menu: function() {
-      if (this.get('sideMenu.isOpen')) {
-        this.get('sideMenu').close();
-      }
+    closeMenu: function() {
+      $('.response-drawer').css('right', -400);
+    },
 
-      Ember.$('.sideways.tabs-right').css('right','-28px');
+    card_number_field_focused: function() {
+      this.get('tour_bot').card_number_field_focused();
+    },
+
+    purchase_amount_field_focused: function() {
+      this.get('tour_bot').purchase_amount_field_focused();
     },
 
     submitPayment: function() {
@@ -106,13 +122,13 @@ export default Ember.Controller.extend({
 
       // Go through array and highlight the selected fields
       array.forEach(function(item) {
-        Ember.$(`#${item}`).css('border', '1px solid red');
+        $(`#${item}`).css('border', '1px solid red');
       });
     },
 
     change_currency: function(currency) {
       // eslint-disable-next-line
-      Ember.$('#currency-selection').html(currency + ' <span class="caret"></span>');
+      $('#currency-selection').html(currency + ' <span class="caret"></span>');
 
       // Change the value of the currency field to the selected currency
       this.set('currency', currency);

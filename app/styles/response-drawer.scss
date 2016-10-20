@@ -1,0 +1,55 @@
+// Styling for the response drawer
+
+.response-drawer {
+  width: 400px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: -400px;
+  z-index: 1;
+  transition: right 0.2s;
+
+  .nav-tabs {
+    right: 371px;
+    position: absolute;
+    margin-top: 100px;
+    transition: right 0.2s;
+  }
+  .nav-tabs > li > a {
+    background-color: $text-light;
+  }
+
+  .navbar {
+    margin-bottom: 0;
+    height: 52px;
+
+    .glyphicon-remove:before {
+      float: right;
+      font-size: 18px;
+      color: $text-light;
+      padding: 5px;
+    }
+  }
+}
+
+.tab-content {
+  height: 100%;
+
+  .tab-pane {
+    padding: 20px;
+    overflow: scroll;
+    height: 100%;
+
+    &.tour-guide {
+      height: 95%;
+      background-color: $light;
+      color: $text-dark
+    }
+
+    &.console {
+      background-color: $dark;
+      color: $text-light;
+    }
+  }
+}

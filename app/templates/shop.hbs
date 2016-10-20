@@ -25,44 +25,41 @@
       total=total
       currency=currency
       api=api
+      card_number_field_focused=(action "card_number_field_focused")
+      purchase_amount_field_focused=(action "purchase_amount_field_focused")
       submitPayment=(action "submitPayment")
       add_card=add_card}}
 
   </div>
 </div>
 
-<ul id="tabs" class="nav nav-tabs tabs-right sideways pull-right">
-  <li class="active"><a {{action "open_side_menu"}} href="#api-requests" data-toggle="tab">API Requests</a></li>
-  <li><a {{action "open_side_menu"}} href="#business-requests" data-toggle="tab">Business</a></li>
-</ul>
-{{#side-menu side="right" width="55%"}}
-  <header class="navbar navbar-default side-menu-navbar">
-    <span style="width: 75%" {{action "close_side_menu"}} class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+<div class="response-drawer">
+
+  <ul class="nav nav-tabs tabs-right sideways pull-left">
+    <li><a {{action "openMenu"}} href="#business-requests" data-toggle="tab">Tour Guide</a></li>
+    <li><a {{action "openMenu"}} href="#api-requests" data-toggle="tab">Console</a></li>
+  </ul>
+
+  <header class="navbar navbar-default">
+    <span {{action "closeMenu"}} class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>
   </header>
 
-  <div style="overflow: scroll; height: 90%" class="tab-content">
-    <div class="tab-pane active responses" id="api-requests">
-      <div class="col-xs-12">
-        <h3>API Responses</h3>
-        <hr>
-      </div>
-      <div class="col-xs-12">
-        {{processor-response responses=responses}}
-      </div>
+  <div class="tab-content">
+
+    <div class="tab-pane active tour-guide" id="business-requests">
+      <h3>Tour Guide</h3>
+      <hr>
+      {{tour-bot-responses responses=tour_bot.tour_bot_responses}}
     </div>
 
-    <div class="tab-pane" id="business-requests">
-      <div class="col-xs-12">
-        <h3>Business Responses</h3>
-        <hr>
-      </div>
-      <div class="col-xs-12">
-
-      </div>
+    <div class="tab-pane console responses-tab" id="api-requests">
+      <h3>API Responses</h3>
+      <hr>
+      {{processor-response responses=responses}}
     </div>
 
   </div>
-{{/side-menu}}
+</div>
 
 {{functional-response-modal
   functionalResponse=functionalResponse

@@ -1,0 +1,108 @@
+/**
+ * Buttons
+ */
+.btn-transparent {
+  background-color: transparent;
+  border-color: transparent;
+}
+.btn-transparent-dark {
+  @extend .btn-transparent;
+  color: $text-dark;
+}
+.btn-transparent-default {
+  @extend .btn-transparent;
+  color: $text-gray;
+}
+.btn-transparent-primary {
+  @extend .btn-transparent;
+  color: $btn-primary-color-bg;
+}
+.btn-transparent-info {
+  @extend .btn-transparent;
+  color: $btn-info-color-bg;
+}
+.btn-transparent-success {
+  @extend .btn-transparent;
+  color: $btn-success-color-bg;
+}
+.btn-transparent-warning {
+  @extend .btn-transparent;
+  color: $btn-warning-color-bg;
+}
+.btn-transparent-danger {
+  @extend .btn-transparent;
+  color: $btn-danger-color-bg;
+}
+
+.btn-transparent-border-dark {
+  @extend .btn-transparent;
+  color: $text-dark;
+  border-color: $text-dark;
+}
+.btn-transparent-border-default {
+  @extend .btn-transparent;
+  color: $text-gray;
+  border-color: $text-gray;
+}
+.btn-transparent-border-primary {
+  @extend .btn-transparent;
+  color: $btn-primary-color-bg;
+  border-color: $btn-primary-color-bg;
+}
+.btn-transparent-border-info {
+  @extend .btn-transparent;
+  color: $btn-info-color-bg;
+  border-color: $btn-info-color-bg;
+}
+.btn-transparent-border-success {
+  @extend .btn-transparent;
+  color: $btn-success-color-bg;
+  border-color: $btn-success-color-bg;
+}
+.btn-transparent-border-warning {
+  @extend .btn-transparent;
+  color: $btn-warning-color-bg;
+  border-color: $btn-warning-color-bg;
+}
+.btn-transparent-border-danger {
+  @extend .btn-transparent;
+  color: $btn-danger-color-bg;
+  border-color: $btn-danger-color-bg;
+}
+.btn-clear-primary {
+  background-color: $body-bg;
+  color: $btn-primary-color-bg;
+  border-color: $btn-primary-color-bg;
+}
+.btn-clear-info {
+  background-color: $body-bg;
+  color: $btn-info-color-bg;
+  border-color: $btn-info-color-bg;
+}
+.btn-clear-success {
+  background-color: $body-bg;
+  color: $btn-success-color-bg;
+  border-color: $btn-success-color-bg;
+}
+.btn-clear-warning {
+  background-color: $body-bg;
+  color: $btn-warning-color-bg;
+  border-color: $btn-warning-color-bg;
+}
+.btn-clear-danger {
+  background-color: $body-bg;
+  color: $btn-danger-color-bg;
+  border-color: $btn-danger-color-bg;
+}
+
+
+.btn-hover-success-light:hover {
+  background-color: $body-bg;
+  color: $btn-success-color-bg;
+  border-color: $btn-success-color-bg;
+}
+.btn-hover-success-dark:hover {
+  color: $body-bg;
+  background-color: $btn-success-color-bg;
+  border-color: $btn-success-color-bg;
+}
