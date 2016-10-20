@@ -6,15 +6,11 @@ export default Controller.extend({
   response_codes: inject.service('response-codes'),
   tour_bot: inject.service('tour-bot'),
 
-  // Preset values for the user
-  name: 'Jamie Jones',
-  number: '4111 1111 1111 1111',
-  month: '10',
-  year: '21',
-  cvc: '222',
   total: 0.00,
   currency: 'EUR',
   api: 'realex',
+
+  // Console & functional responses
   responses: [],
   functionalResponse: {},
 
