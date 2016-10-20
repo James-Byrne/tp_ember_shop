@@ -29,6 +29,10 @@
     overflow: scroll;
     height: 100%;
 
+    p {
+      margin-top: 55px;
+    }
+
     &.tour-guide {
       height: 95%;
       background-color: $light;
@@ -44,6 +48,8 @@
       margin: -20px;
       margin-bottom: 20px;
       height: 52px;
+      position: fixed;
+      width: 400px;
 
       .glyphicon-log-out:before {
         float: right;
