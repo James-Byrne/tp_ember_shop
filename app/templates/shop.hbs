@@ -40,7 +40,7 @@
 
   <div class="tab-content">
 
-    <div class="tab-pane active tour-guide" id="business-requests">
+    <div class="tab-pane active tour-guide" id="tour-bot">
       <header class="navbar navbar-default">
         <span class="navbar-brand">Tour Guide</span>
         <span {{action "closeMenu"}} class="glyphicon glyphicon-log-out pull-right" aria-hidden="true"></span>
@@ -52,7 +52,7 @@
       {{tour-bot-responses responses=tour_bot.tour_bot_responses}}
     </div>
 
-    <div class="tab-pane console responses-tab" id="api-requests">
+    <div class="tab-pane console" id="api-console">
       <header class="navbar navbar-default">
         <span class="navbar-brand">API Console</span>
         <span {{action "closeMenu"}} class="glyphicon glyphicon-log-out pull-right" aria-hidden="true"></span>

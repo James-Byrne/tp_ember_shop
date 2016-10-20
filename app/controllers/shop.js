@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { Controller, computed, $, inject } = Ember;
+const { Controller, computed, observer, $, inject } = Ember;
 
 export default Controller.extend({
   response_codes: inject.service('response-codes'),
@@ -27,6 +27,14 @@ export default Controller.extend({
     return (this.get('api') === 'realex') ? 'Realex Test API' : 'TestingPays Sim';
   }),
 
+  scroll_to_bottom_console: observer('responses.@each', function() {
+    $('#api-console').animate({ scrollTop: $('#api-console')[0].scrollHeight }, 1000);
+  }),
+
+  scroll_to_bottom_tour: observer('tour_bot.tour_bot_responses.@each', function() {
+    $('#tour-bot').animate({ scrollTop: $('#tour-bot')[0].scrollHeight }, 1000);
+  }),
+
   create_response(raw_xml) {
     let xml = $($.parseXML(raw_xml));
     var xml_string = (new XMLSerializer()).serializeToString($.parseXML(raw_xml));
@@ -50,7 +58,7 @@ export default Controller.extend({
   create_functional_response(code) {
     this.set('functionalResponse', this.get('response_codes').get_response_code(code));
 
-  // If we have a response available open the modal
+    // If we have a response available open the modal
     if (this.get('functionalResponse')) {
       $('#functional-response-modal').modal('show');
     }
