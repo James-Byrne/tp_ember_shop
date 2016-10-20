@@ -1,5 +1,5 @@
 {{#each responses as |response|}}
-  <div class="panel-group remove {{if (eq '00' response.result) "success" "error"}}">
+  <div class="panel-group {{if (eq '00' response.result) "success" "error"}}">
     <div class="panel panel-default">
 
       <div class="panel-heading">

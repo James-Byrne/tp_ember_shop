@@ -19,18 +19,6 @@
   .nav-tabs > li > a {
     background-color: $text-light;
   }
-
-  .navbar {
-    margin-bottom: 0;
-    height: 52px;
-
-    .glyphicon-remove:before {
-      float: right;
-      font-size: 18px;
-      color: $text-light;
-      padding: 5px;
-    }
-  }
 }
 
 .tab-content {
@@ -51,5 +39,18 @@
       background-color: $dark;
       color: $text-light;
     }
+
+    .navbar {
+      margin: -20px;
+      height: 52px;
+
+      .glyphicon-log-out:before {
+        float: right;
+        font-size: 18px;
+        color: $text-light;
+        padding: 13px;
+      }
+    }
+
   }
 }

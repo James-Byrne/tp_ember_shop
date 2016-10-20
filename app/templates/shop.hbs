@@ -40,20 +40,24 @@
     <li><a {{action "openMenu"}} href="#api-requests" data-toggle="tab">Console</a></li>
   </ul>
 
-  <header class="navbar navbar-default">
-    <span {{action "closeMenu"}} class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>
-  </header>
-
   <div class="tab-content">
 
     <div class="tab-pane active tour-guide" id="business-requests">
-      <h3>Tour Guide</h3>
+      <header class="navbar navbar-default">
+        <span class="navbar-brand">Tour Guide</span>
+        <span {{action "closeMenu"}} class="glyphicon glyphicon-log-out pull-right" aria-hidden="true"></span>
+      </header>
+
       <hr>
       {{tour-bot-responses responses=tour_bot.tour_bot_responses}}
     </div>
 
     <div class="tab-pane console responses-tab" id="api-requests">
-      <h3>API Responses</h3>
+      <header class="navbar navbar-default">
+        <span class="navbar-brand">API Console</span>
+        <span {{action "closeMenu"}} class="glyphicon glyphicon-log-out pull-right" aria-hidden="true"></span>
+      </header>
+
       <hr>
       {{processor-response responses=responses}}
     </div>
