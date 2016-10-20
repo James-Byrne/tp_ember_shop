@@ -12,7 +12,7 @@
 
   <h3>Step 2 : Complete the checkout form &amp; checkout</h3>
   <div class="content-container">
-    <small>Don't worry these are NOT for real money</small>
+    <small>Don't worry, all transactions you make here are in test mode. No real money is involved so make as many as you like.</small>
 
     {{credit-card-form
       name=name
@@ -46,7 +46,7 @@
         <span {{action "closeMenu"}} class="glyphicon glyphicon-log-out pull-right" aria-hidden="true"></span>
       </header>
       <p>
-        Welcome to our Demo Store. We've built it to show how e-commerce sites can be used with our TestingPays simulator platform. You can switch the store to send transactions to our sim or to a real payment processor. In this case, we've chosen <a href="https://developer.realexpayments.com/#!/api">Realex</a>.
+        Welcome to our Demo Store. We've built it to show how e-commerce sites can be used with our TestingPays simulator platform. You can switch the store to send transactions to our sim or to a real payment processor. In this case, we've chosen <a href="https://developer.realexpayments.com/#!/api" target="_blank">Realex</a>.
       </p>
       <hr>
       {{tour-bot-responses responses=tour_bot.tour_bot_responses}}
@@ -58,7 +58,7 @@
         <span {{action "closeMenu"}} class="glyphicon glyphicon-log-out pull-right" aria-hidden="true"></span>
       </header>
       <p>
-        Fixed position blurb at top of the API Responses panel: Welcome to our Demo Store. This panel allows you to see and compare the raw API responses from both our TestingPays simulator and the real payment processor, in this case, <a class="testingpays" href="https://developer.realexpayments.com/#!/api">Realex</a>.
+        Fixed position blurb at top of the API Responses panel: Welcome to our Demo Store. This panel allows you to see and compare the raw API responses from both our TestingPays simulator and the real payment processor, in this case, <a class="testingpays" href="https://developer.realexpayments.com/#!/api" target="_blank">Realex</a>.
       </p>
       <hr>
       {{processor-response responses=responses}}

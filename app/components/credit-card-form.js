@@ -62,23 +62,9 @@ export default Component.extend({
     let holder;
 
     if (this.get('api') === 'realex') {
-      holder = '4263970000005262 (00 - Successful)\
-        4000120000001154 (101 - Declined)\
-        4000130000001724 (102 - Referral B)\
-        4000160000004147 (103 - Referral A)\
-        4009830000001985 (200 - Comms Error)\
-        5425230000004415 (00 - Successful)\
-        5114610000004778 (101 - Declined)\
-        5114630000009791 (102 - Referral B)\
-        5121220000006921 (103 - Referral A)\
-        5135020000005871 (200 - Comms Error)\
-        374101000000608 (00 - Successful)\
-        375425000003 (101 - Declined)\
-        375425000000907 (102 - Referral B)\
-        343452000000306 (103 - Referral A)\
-        372349000000852 (200 - Comms Error)';
+      holder = 'You can test some checkout scenarios against the Realex\'s test system but it only supports a small list API responses. You must also only use card numbers from the Realex list of test cards to get these responses. The list of card numbers is available at https://developer.realexpayments.com /#!/technical-resources/test-card.';
     } else {
-      holder = 'When pointing at the TestingPays Sim, you can use any valid credit number in this field.';
+      holder = 'With the TestingPays Sim, you can get any Realex response you like back in the transaction response using the amount field, below. You\'re not limited by any test card numbers. In fact, you can use any card number you like in this field, so long as it\'s valid Mod-10 format (e.g. 5195253120409072). You can even use your own card number.';
     }
 
     return holder;
@@ -90,15 +76,7 @@ export default Component.extend({
     if (this.get('api') === 'realex') {
       holder = 'Enter any amount in this field. Enter any amount in this field. Realex’s test system ignores the amount aslong as it is over 0.50';
     } else {
-      holder = 'When pointing at TestingPays Sim, use the decimal part of the amount to get back the Realex API response you  want to test.\
-Examples:\
-\
-123.00 (00 - Successful)\
-52.10 (101_declined_bank)\
-400.12 (103_card_stolen)\
-76.21  (205_bank_comm)\
-45.22 (507_currency)\
-670.16 (603_error)';
+      holder = 'The TestingPays sim uses the amount field to know what specific API response to send back from our Realex sim. Example: X.01 will get a success, X.21 will get a specific decline. Sign up for free to see the full list of API response mappings.';
     }
 
     return holder;
