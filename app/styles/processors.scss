@@ -1,31 +1,34 @@
 // Custom stylings for the different APIs
+$realex: #F29023;
+$testingpays: $brand-primary;
+
 
 // Realex
 .realex {
-  color: $brand-secondary !important;
+  color: $realex !important;
 }
 
 .btn-realex {
   @extend .realex;
-  border-color: $brand-secondary !important;
+  border-color: $realex !important;
 }
 
 .background-color-realex {
   color: $text-light !important;
-  background-color: $brand-secondary !important;
+  background-color: $realex !important;
 }
 
 // TestingPays
 .testingpays {
-  color: $brand-success !important;
+  color: $testingpays !important;
 }
 
 .btn-testingpays {
   @extend .testingpays;
-  border-color: $brand-success !important;
+  border-color: $testingpays !important;
 }
 
 .background-color-testingpays {
   color: $text-light !important;
-  background-color: $brand-success !important;
+  background-color: $testingpays !important;
 }
