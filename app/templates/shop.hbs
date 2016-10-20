@@ -45,7 +45,9 @@
         <span class="navbar-brand">Tour Guide</span>
         <span {{action "closeMenu"}} class="glyphicon glyphicon-log-out pull-right" aria-hidden="true"></span>
       </header>
-
+      <p>
+        Welcome to our Demo Store. We've built it to show how e-commerce sites can be used with our TestingPays simulator platform. You can switch the store to send transactions to our sim or to a real payment processor. In this case, we've chosen <a href="https://developer.realexpayments.com/#!/api">Realex</a>.
+      </p>
       <hr>
       {{tour-bot-responses responses=tour_bot.tour_bot_responses}}
     </div>
@@ -55,7 +57,9 @@
         <span class="navbar-brand">API Console</span>
         <span {{action "closeMenu"}} class="glyphicon glyphicon-log-out pull-right" aria-hidden="true"></span>
       </header>
-
+      <p>
+        Fixed position blurb at top of the API Responses panel: Welcome to our Demo Store. This panel allows you to see and compare the raw API responses from both our TestingPays simulator and the real payment processor, in this case, <a class="testingpays" href="https://developer.realexpayments.com/#!/api">Realex</a>.
+      </p>
       <hr>
       {{processor-response responses=responses}}
     </div>
