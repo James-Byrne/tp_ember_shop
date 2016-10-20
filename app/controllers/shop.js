@@ -40,6 +40,7 @@ export default Controller.extend({
     var xml_string = (new XMLSerializer()).serializeToString($.parseXML(raw_xml));
 
     let response = {
+      api: this.get('api'),
       result: xml.find('result').text(),
       orderid: xml.find('orderid').text(),
       message: xml.find('message').text(),
