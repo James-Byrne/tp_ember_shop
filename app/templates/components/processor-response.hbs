@@ -1,10 +1,11 @@
 {{#each responses as |response|}}
-  <div class="panel-group remove {{if (eq '00' response.result) "success" "error"}}">
+  <div class="panel-group {{if (eq '00' response.result) "success" "error"}}">
     <div class="panel panel-default">
 
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a href="#{{response.orderid}}" data-toggle='collapse'>Result Code : {{response.result}}</a>
+          <a href="#{{response.orderid}}" data-toggle="collapse">Result Code : {{response.result}}</a>
+          <a href="#{{response.orderid}}" class="glyphicon glyphicon-triangle-bottom pull-right" data-toggle="collapse"></a>
         </h4>
       </div>
 

@@ -1,20 +1,18 @@
 <div class="container">
 
-  <div id="title" class="col-xs-12">
-    <h2>Welcome to TestingPays Demo Store</h2>
-    <hr>
-  </div>
+  <h2>Welcome to TestingPays Demo Store</h2>
+  <hr class="content-container">
 
   <h3>Step 1: Select where you would like the to send the transaction</h3>
   <div class="content-container">
     <h4>Currently pointing at : <span class="{{api}}">{{currentApiText}}</span></h4>
     <br>
-    <button {{action "swapAPI"}} class="btn btn-clear-primary btn-lg btn-{{api}}">Switch to {{api}}</button>
+    <button {{action "swapAPI"}} class="btn btn-clear-primary btn-lg btn-{{if (eq api 'realex') 'testingpays' 'realex'}}">Switch to {{if (eq api 'realex') 'TestingPays' 'Realex'}}</button>
   </div>
 
   <h3>Step 2 : Complete the checkout form &amp; checkout</h3>
   <div class="content-container">
-    <small>Don't worry these are NOT for real money</small>
+    <small>Don't worry, all transactions you make here are in test mode. No real money is involved so make as many as you like.</small>
 
     {{credit-card-form
       name=name
@@ -40,20 +38,28 @@
     <li><a {{action "openMenu"}} href="#api-requests" data-toggle="tab">Console</a></li>
   </ul>
 
-  <header class="navbar navbar-default">
-    <span {{action "closeMenu"}} class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>
-  </header>
-
   <div class="tab-content">
 
-    <div class="tab-pane active tour-guide" id="business-requests">
-      <h3>Tour Guide</h3>
+    <div class="tab-pane active tour-guide" id="tour-bot">
+      <header class="navbar navbar-default">
+        <span class="navbar-brand">Tour Guide</span>
+        <span {{action "closeMenu"}} class="glyphicon glyphicon-log-out pull-right" aria-hidden="true"></span>
+      </header>
+      <p>
+        Welcome to our Demo Store. We've built it to show how e-commerce sites can be used with our TestingPays simulator platform. You can switch the store to send transactions to our sim or to a real payment processor. In this case, we've chosen <a href="https://developer.realexpayments.com/#!/api" target="_blank">Realex</a>.
+      </p>
       <hr>
       {{tour-bot-responses responses=tour_bot.tour_bot_responses}}
     </div>
 
-    <div class="tab-pane console responses-tab" id="api-requests">
-      <h3>API Responses</h3>
+    <div class="tab-pane console" id="api-console">
+      <header class="navbar navbar-default">
+        <span class="navbar-brand">API Console</span>
+        <span {{action "closeMenu"}} class="glyphicon glyphicon-log-out pull-right" aria-hidden="true"></span>
+      </header>
+      <p>
+        Fixed position blurb at top of the API Responses panel: Welcome to our Demo Store. This panel allows you to see and compare the raw API responses from both our TestingPays simulator and the real payment processor, in this case, <a class="testingpays" href="https://developer.realexpayments.com/#!/api" target="_blank">Realex</a>.
+      </p>
       <hr>
       {{processor-response responses=responses}}
     </div>

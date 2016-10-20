@@ -1,20 +1,16 @@
 import Ember from 'ember';
 
-const { Controller, computed, $, inject } = Ember;
+const { Controller, computed, observer, $, inject } = Ember;
 
 export default Controller.extend({
   response_codes: inject.service('response-codes'),
   tour_bot: inject.service('tour-bot'),
 
-  // Preset values for the user
-  name: 'Jamie Jones',
-  number: '4111 1111 1111 1111',
-  month: '10',
-  year: '21',
-  cvc: '222',
   total: 0.00,
   currency: 'EUR',
   api: 'realex',
+
+  // Console & functional responses
   responses: [],
   functionalResponse: {},
 
@@ -29,6 +25,14 @@ export default Controller.extend({
 
   currentApiText: computed('api', function() {
     return (this.get('api') === 'realex') ? 'Realex Test API' : 'TestingPays Sim';
+  }),
+
+  scroll_to_bottom_console: observer('responses.@each', function() {
+    $('#api-console').animate({ scrollTop: $('#api-console')[0].scrollHeight }, 1000);
+  }),
+
+  scroll_to_bottom_tour: observer('tour_bot.tour_bot_responses.@each', function() {
+    $('#tour-bot').animate({ scrollTop: $('#tour-bot')[0].scrollHeight }, 1000);
   }),
 
   create_response(raw_xml) {
@@ -54,7 +58,7 @@ export default Controller.extend({
   create_functional_response(code) {
     this.set('functionalResponse', this.get('response_codes').get_response_code(code));
 
-  // If we have a response available open the modal
+    // If we have a response available open the modal
     if (this.get('functionalResponse')) {
       $('#functional-response-modal').modal('show');
     }

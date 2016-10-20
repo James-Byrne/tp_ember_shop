@@ -29,25 +29,28 @@ export default Ember.Service.extend({
     events.on('card_number_field_focused_realex', () => {
       this.get('tour_bot_responses').pushObject({
         api: this.get('current_api'),
-        message: 'When testing against Realex\'s systems, you can only use preconfigured credit card numbers to test a small set of card responses.'
-      });
-      this.get('tour_bot_responses').pushObject({
-        api: this.get('current_api'),
-        message: 'Click the little info tooltip beside the card number field to see the list of cards. There\'s a little bit more information on Realex\'s page here[link].'
+        message: 'To test with Realex\'s test API, you can\'t use any card number. Instead, Realex have preconfigured their test system to give a fixed response to particular card numbers. You must use one of the numbers from their small set list of cards to test agains their system. You can find here these cards here: <a href="https://developer.realexpayments.com/#!/technical-resources/test-card" target="_blank">list of Realex\'s test cards</a>'
       });
     });
 
     events.on('card_number_field_focused_testingpays', () => {
       this.get('tour_bot_responses').pushObject({
         api: this.get('current_api'),
-        message: 'You can enter ANY card number when testing against the sim. You can even use your own card number - don\'t worry, the transaction is not real, so you won\'t get charged.'
+        message: 'You can enter any card number in here when pointing at TestingPays. Just one thing: it must be a valid card number (i.e. mod-10). You can even use real card numbers. Don\'t worry, all transactions are test only... no real money is ever transacted.'
       });
     });
 
-    events.on('purchase_amount_field_focused', () => {
+    events.on('purchase_amount_field_focused_testingpays', () => {
       this.get('tour_bot_responses').pushObject({
         api: this.get('current_api'),
-        message: 'You can get any API response you like back from the sim by using a different cent or pence value in the amount field. Click the information icon beside the field to see some examples of common responses. Sign-up here to see the full list of API response mappings in the sim [LINK TO RELEAX MAPPINGS].'
+        message: 'With the TestingPays sim, you can use the cent value (i.e. the digits to the right of the decimal) to generate any Realex API response for your development and testing. Example: X.01 will get a success, X.21 will get a specific decline. <a href="https://admin.testingpays.com/sign_up" target="_blank">Sign up</a> for free to see the full list of API response mappings.'
+      });
+    });
+
+    events.on('purchase_amount_field_focused_realex', () => {
+      this.get('tour_bot_responses').pushObject({
+        api: this.get('current_api'),
+        message: 'Realex\'s API sandbox supports any amount in this field. Instead, they use a fixed list of card numbers to generate specific API responses for your testing and development.'
       });
     });
 
@@ -84,7 +87,7 @@ export default Ember.Service.extend({
   },
 
   purchase_amount_field_focused() {
-    this.get('events').trigger('purchase_amount_field_focused');
+    this.get('events').trigger(`purchase_amount_field_focused_${this.get('current_api')}`);
   },
 
   valid_purchase(response) {

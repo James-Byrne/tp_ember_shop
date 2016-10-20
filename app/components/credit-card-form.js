@@ -2,7 +2,7 @@ import Ember from 'ember';
 import Validations from 'ember-credit-cards/utils/validations';
 import Cards from 'ember-credit-cards/utils/cards';
 
-const {Component, computed} = Ember;
+const { Component, computed, $ } = Ember;
 
 /**
  * The below code is the same as the code found within the ember-credit-cards
@@ -19,19 +19,22 @@ export default Component.extend({
   currency: null,
   convertedTotal: 0,
 
-  setup: Ember.on('didRender', function() {
-    // Enable bootstrap tooltips
-    // eslint-disable-next-line
-    Ember.$('[data-toggle="tooltip"]').tooltip();
+  init() {
+    this._super(...arguments);
 
-    Ember.$('#toggle-provider').change(() => {
-      this.set('api', (Ember.$('#toggle-provider').prop('checked')) ? 'realex': 'testingpays');
-      Ember.$('#cardNumberInfo').attr('data-original-title', this.get('card_number_info'));
-      Ember.$('#total-info').attr('data-original-title', this.get('total_info'));
-    });
-
+    // Format the totals when entering
     this.format_totals();
-  }),
+  },
+
+  didRender() {
+    this._super(...arguments);
+
+    // Enable bootstrap tooltips
+    $('[data-toggle="tooltip"]').tooltip();
+
+    $('#cardNumberInfo').attr('data-original-title', this.get('card_number_info'));
+    $('#total-info').attr('data-original-title', this.get('total_info'));
+  },
 
   // Ensure that the total and converted are padded out to the format of : 10.00
   format_totals() {
@@ -55,47 +58,25 @@ export default Component.extend({
     }
   }),
 
-  card_number_info: Ember.computed('api', function() {
+  card_number_info: computed('api', function() {
     let holder;
 
     if (this.get('api') === 'realex') {
-      holder = '4263970000005262 (00 - Successful)\
-        4000120000001154 (101 - Declined)\
-        4000130000001724 (102 - Referral B)\
-        4000160000004147 (103 - Referral A)\
-        4009830000001985 (200 - Comms Error)\
-        5425230000004415 (00 - Successful)\
-        5114610000004778 (101 - Declined)\
-        5114630000009791 (102 - Referral B)\
-        5121220000006921 (103 - Referral A)\
-        5135020000005871 (200 - Comms Error)\
-        374101000000608 (00 - Successful)\
-        375425000003 (101 - Declined)\
-        375425000000907 (102 - Referral B)\
-        343452000000306 (103 - Referral A)\
-        372349000000852 (200 - Comms Error)';
+      holder = 'You can test some checkout scenarios against the Realex\'s test system but it only supports a small list API responses. You must also only use card numbers from the Realex list of test cards to get these responses. The list of card numbers is available at https://developer.realexpayments.com /#!/technical-resources/test-card.';
     } else {
-      holder = 'When pointing at the TestingPays Sim, you can use any valid credit number in this field.';
+      holder = 'With the TestingPays Sim, you can get any Realex response you like back in the transaction response using the amount field, below. You\'re not limited by any test card numbers. In fact, you can use any card number you like in this field, so long as it\'s valid Mod-10 format (e.g. 5195253120409072). You can even use your own card number.';
     }
 
     return holder;
   }),
 
-  total_info: Ember.computed('api', function () {
+  total_info: computed('api', function () {
     let holder;
 
     if (this.get('api') === 'realex') {
       holder = 'Enter any amount in this field. Enter any amount in this field. Realex’s test system ignores the amount aslong as it is over 0.50';
     } else {
-      holder = 'When pointing at TestingPays Sim, use the decimal part of the amount to get back the Realex API response you  want to test.\
-Examples:\
-\
-123.00 (00 - Successful)\
-52.10 (101_declined_bank)\
-400.12 (103_card_stolen)\
-76.21  (205_bank_comm)\
-45.22 (507_currency)\
-670.16 (603_error)';
+      holder = 'The TestingPays sim uses the amount field to know what specific API response to send back from our Realex sim. Example: X.01 will get a success, X.21 will get a specific decline. Sign up for free to see the full list of API response mappings.';
     }
 
     return holder;
@@ -139,8 +120,7 @@ Examples:\
 
     change_currency: function(currency) {
       // Change the currency in the dropdown menu
-      // eslint-disable-next-line
-      Ember.$('#currency-selection').html(currency + ' <span class="caret"></span>');
+      $('#currency-selection').html(currency + ' <span class="caret"></span>');
 
       // Pass the change up to the payment-form component
       this.set('currency', currency);
