@@ -29,14 +29,15 @@ module.exports = function(environment) {
     'default-src': "'self'",
     'script-src': "'self' 'unsafe-eval'",
     'font-src': "'self'",
-    'connect-src': "'self' http://localhost:8001",
-    'img-src': "'self' http://localhost:3000",
+    'connect-src': "'self' http://localhost:8001 http://52.48.102.235",
+    'img-src': "'self' http://localhost:8001 http://52.48.102.235",
     'style-src': "'self' 'unsafe-inline'",
     'media-src': "'self'"
   };
   /* eslint-enable */
 
   if (environment === 'development') {
+    ENV.shop_url = 'http://localhost:8001';
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
@@ -57,7 +58,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    //
+    ENV.shop_url = 'http://52.48.102.235';
   }
 
   return ENV;

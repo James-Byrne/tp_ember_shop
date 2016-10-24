@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import ENV from '../config/environment';
 
 const { Controller, computed, observer, $, inject } = Ember;
 
@@ -67,7 +68,7 @@ export default Controller.extend({
 
   checkout() {
     $.ajax({
-      url: 'http://localhost:8001/api/pay',
+      url: `${ENV.shop_url}/api/pay`,
       type: 'POST',
       data: {
         firstName: this.get('name'),
