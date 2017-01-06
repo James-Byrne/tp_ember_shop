@@ -94,35 +94,35 @@ export default Controller.extend({
   },
 
   actions: {
-    swapAPI: function() {
+    swapAPI() {
       this.set('api', (this.get('api') === 'realex') ? 'testingpays' : 'realex');
 
       // Let tour bot know that the api has changed
       this.get('tour_bot').changed_api(this.get('api'));
     },
 
-    openMenu: function() {
+    openMenu() {
       $('.response-drawer').css('right', 0);
     },
 
-    closeMenu: function() {
+    closeMenu() {
       $('.response-drawer').css('right', -400);
     },
 
-    card_number_field_focused: function() {
+    card_number_field_focused() {
       this.get('tour_bot').card_number_field_focused();
     },
 
-    purchase_amount_field_focused: function() {
+    purchase_amount_field_focused() {
       this.get('tour_bot').purchase_amount_field_focused();
     },
 
-    submitPayment: function() {
+    submitPayment() {
       this.checkout();
     },
 
     // Highlight the elements passed to the function
-    highlight: function(fields_to_highlight) {
+    highlight(fields_to_highlight) {
       let array = fields_to_highlight.split(',');
 
       // Go through array and highlight the selected fields
@@ -131,7 +131,7 @@ export default Controller.extend({
       });
     },
 
-    change_currency: function(currency) {
+    change_currency(currency) {
       // eslint-disable-next-line
       $('#currency-selection').html(currency + ' <span class="caret"></span>');
 
@@ -143,7 +143,7 @@ export default Controller.extend({
     },
 
     // Re-submit the form ensuring a success message
-    retry: function() {
+    retry() {
       this.retryPurchase();
     }
   }
