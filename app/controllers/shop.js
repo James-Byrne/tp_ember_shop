@@ -6,7 +6,7 @@ export default Controller.extend({
   response_codes: inject.service('response-codes'),
   tour_bot: inject.service('tour-bot'),
 
-  total: 0.00,
+  total: '0.00',
   currency: 'EUR',
   api: 'realex',
 
