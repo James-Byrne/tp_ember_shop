@@ -8,7 +8,6 @@ export default Ember.Service.extend({
     'description': 'Successful – the transaction has processed and you may proceed with the sale.',
     'checkoutmessage': 'Success. Your purchase is complete.',
     'checkoutOptions': {
-      'Ok': ['rest'],
       'Keep Shopping': ['reset']
     }
   }, {
