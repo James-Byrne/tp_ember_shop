@@ -1,11 +1,12 @@
 import Ember from 'ember';
 
-export default Ember.Service.extend({
+const { Service } = Ember;
+
+export default Service.extend({
   events: null,
   tour_bot_responses: [],
   current_api: 'realex',
 
-  // TODO : MAKE SURE THE LINKS BELOW WORK CORRECTLY
 
   init() {
     const EventedObject = Ember.Object.extend(Ember.Evented, {});
@@ -68,7 +69,7 @@ export default Ember.Service.extend({
 
       this.get('tour_bot_responses').pushObject({
         api: this.get('current_api'),
-        message: `You sent this amount to Realex, which returns ${mapping}.`
+        message: `You sent a request to Realex, which returned ${mapping}.`
       });
     });
 
