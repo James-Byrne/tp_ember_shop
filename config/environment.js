@@ -29,8 +29,8 @@ module.exports = function(environment) {
     'default-src': "'self'",
     'script-src': "'self' 'unsafe-eval'",
     'font-src': "'self'",
-    'connect-src': "'self' http://localhost:8001 http://52.48.102.235",
-    'img-src': "'self' http://localhost:8001 http://52.48.102.235",
+    'connect-src': "'self' http://localhost:8001 http://34.250.176.158",
+    'img-src': "'self' http://localhost:8001 http://34.250.176.158",
     'style-src': "'self' 'unsafe-inline'",
     'media-src': "'self'"
   };
@@ -58,7 +58,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.shop_url = 'http://52.48.102.235';
+    ENV.shop_url = 'http://34.250.176.158';
   }
 
   return ENV;
