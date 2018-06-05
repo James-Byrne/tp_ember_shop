@@ -10,6 +10,7 @@ export default Controller.extend({
   total: '0.00',
   currency: 'EUR',
   api: 'realex',
+  "3dsecure": 0,
 
   // Console & functional responses
   responses: [],
@@ -79,7 +80,8 @@ export default Controller.extend({
         cvv: this.get('cvc'),
         api: this.get('api'),
         total: this.get('total'),
-        currency: this.get('currency')
+        currency: this.get('currency'),
+        "3dsecure": this.get('3dsecure')
       }
     }).done((res) => {
       // Create the new response item
