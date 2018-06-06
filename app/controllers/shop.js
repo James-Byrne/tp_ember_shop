@@ -6,15 +6,22 @@ const { Controller, computed, observer, $, inject } = Ember;
 export default Controller.extend({
   response_codes: inject.service('response-codes'),
   tour_bot: inject.service('tour-bot'),
+  term_url: ENV.three_d_return,
 
-  total: '0.00',
+  total: '10.00',
   currency: 'EUR',
   api: 'realex',
   "3dsecure": 0,
+  name: "Test C. Ard",
+  number: "4242424242424242",
+  year: "21",
+  month: "12",
+  cvc: "123",
 
   // Console & functional responses
   responses: [],
   functionalResponse: {},
+  redirect: {},
 
   init() {
     this._super(...arguments);
@@ -37,7 +44,8 @@ export default Controller.extend({
     $('#tour-bot').animate({ scrollTop: $('#tour-bot')[0].scrollHeight }, 1000);
   }),
 
-  create_response(raw_xml) {
+  create_response(result) {
+    let raw_xml = result.xml;
     let xml = $($.parseXML(raw_xml));
     var xml_string = (new XMLSerializer()).serializeToString($.parseXML(raw_xml));
 
@@ -54,8 +62,19 @@ export default Controller.extend({
     // Generate a message from the tour bot
     this.get('tour_bot').valid_purchase(response);
 
-    this.get('responses').pushObject(response);
-    this.create_functional_response(xml.find('result').text());
+    if (result.url && result.data && result.method) {
+      // Create a redirect modal
+      this.create_redirect(result);
+    } else {
+      this.get('responses').pushObject(response);
+      this.create_functional_response(xml.find('result').text());
+    }
+  },
+
+  create_redirect(obj) {
+    // Set the term url on the object
+    this.set('redirect', obj);
+    $('#redirect-modal').modal('show');
   },
 
   create_functional_response(code) {
@@ -67,11 +86,21 @@ export default Controller.extend({
     }
   },
 
-  checkout() {
-    $.ajax({
-      url: `${ENV.shop_url}/api/pay`,
-      type: 'POST',
-      data: {
+  isJson(str) {
+    try {
+      JSON.parse(str);
+    } catch (e) {
+      return false;
+    }
+    return true;
+  },
+
+  merchant_data: computed('checkout_data', function() {
+     return JSON.stringify(this.get('checkout_data'));
+  }),
+
+  checkout_data: computed('name', 'number', 'month', 'year', 'cvc', 'api', 'total', 'currency', '3dsecure', function() {
+      return {
         firstName: this.get('name'),
         lastName: this.get('name'),
         cardNumber: this.get('number'),
@@ -82,15 +111,18 @@ export default Controller.extend({
         total: this.get('total'),
         currency: this.get('currency'),
         "3dsecure": this.get('3dsecure')
-      }
+      };
+  }),
+
+  checkout() {
+    $.ajax({
+      url: `${ENV.shop_url}/api/pay`,
+      type: 'POST',
+      data: this.get('checkout_data')
     }).done((res) => {
       // Create the new response item
       try {
-        const parsed = JSON.parse(res);
-        this.create_response(parsed.xml);
-        if (parsed.url) {
-          console.log(parsed);
-        }
+        this.create_response(JSON.parse(res));
       } catch (e) {
         this.create_response(res);
       }
