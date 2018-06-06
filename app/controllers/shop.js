@@ -85,7 +85,15 @@ export default Controller.extend({
       }
     }).done((res) => {
       // Create the new response item
-      this.create_response(res);
+      try {
+        const parsed = JSON.parse(res);
+        this.create_response(parsed.xml);
+        if (parsed.url) {
+          console.log(parsed);
+        }
+      } catch (e) {
+        this.create_response(res);
+      }
     }).fail(function() {
       // createFunctionalResponse('timeout');
     });
