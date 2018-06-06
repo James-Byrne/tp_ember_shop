@@ -96,7 +96,7 @@ export default Controller.extend({
   },
 
   merchant_data: computed('checkout_data', function() {
-     return JSON.stringify(this.get('checkout_data'));
+     return btoa(JSON.stringify(this.get('checkout_data')));
   }),
 
   checkout_data: computed('name', 'number', 'month', 'year', 'cvc', 'api', 'total', 'currency', '3dsecure', function() {
