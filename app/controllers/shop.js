@@ -4,6 +4,10 @@ import ENV from '../config/environment';
 const { Controller, computed, observer, $, inject } = Ember;
 
 export default Controller.extend({
+  queryParams: ['xml', 'three_d_return'],
+  three_d_return: false,
+  xml: "",
+
   response_codes: inject.service('response-codes'),
   tour_bot: inject.service('tour-bot'),
   term_url: ENV.three_d_return,
@@ -11,7 +15,7 @@ export default Controller.extend({
   transactionId: "T0001",
   total: '10.00',
   currency: 'EUR',
-  api: 'realex',
+  api: 'testingpays',
   "3dsecure": 0,
   name: "Test C. Ard",
   number: "4242424242424242",
@@ -26,11 +30,21 @@ export default Controller.extend({
 
   init() {
     this._super(...arguments);
-
     // After three seconds show the drawer to the user
-    setTimeout(function() {
+    setTimeout(() => {
+      this.checkFor3DResponse();
+    }, 1000);
+
+    setTimeout(() => {
       $('.response-drawer').css('right', 0);
     }, 3000);
+  },
+
+  // Check if we got a 3D response back
+  checkFor3DResponse() {
+    if (this.get('three_d_return')) {
+      this.create_response({xml: atob(this.get('xml')), three_d_return: this.get('three_d_return')})
+    }
   },
 
   currentApiText: computed('api', function() {
@@ -57,7 +71,8 @@ export default Controller.extend({
       message: xml.find('message').text(),
       batchid: xml.find('batchid').text(),
       authcode: xml.find('authcode').text(),
-      xml: xml_string
+      xml: xml_string,
+      three_d_return: result.three_d_return
     };
 
     // Generate a message from the tour bot
@@ -85,15 +100,6 @@ export default Controller.extend({
     if (this.get('functionalResponse')) {
       $('#functional-response-modal').modal('show');
     }
-  },
-
-  isJson(str) {
-    try {
-      JSON.parse(str);
-    } catch (e) {
-      return false;
-    }
-    return true;
   },
 
   merchant_data: computed('checkout_data', function() {
