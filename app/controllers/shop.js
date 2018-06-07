@@ -4,8 +4,9 @@ import ENV from '../config/environment';
 const { Controller, computed, observer, $, inject } = Ember;
 
 export default Controller.extend({
-  queryParams: ['xml', 'three_d_return'],
+  queryParams: ['xml', 'three_d_return', 'three_d_cancelled'],
   three_d_return: false,
+  three_d_cancelled: false,
   xml: "",
 
   response_codes: inject.service('response-codes'),
@@ -43,7 +44,11 @@ export default Controller.extend({
   // Check if we got a 3D response back
   checkFor3DResponse() {
     if (this.get('three_d_return')) {
-      this.create_response({xml: atob(this.get('xml')), three_d_return: this.get('three_d_return')})
+      if (this.get('three_d_cancelled')) {
+        $('#redirect-modal').modal('show');
+      } else {
+        this.create_response({xml: atob(this.get('xml')), three_d_return: this.get('three_d_return')})
+      }
     }
   },
 
@@ -204,6 +209,11 @@ export default Controller.extend({
     // Re-submit the form ensuring a success message
     retry() {
       this.retryPurchase();
+    },
+
+    clear_three_d_params() {
+      this.set('three_d_cancelled', false);
+      this.set('three_d_return', false);
     }
   }
 });

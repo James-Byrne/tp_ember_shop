@@ -10,24 +10,32 @@
       </div>
 
       <div class="modal-body">
+        {{#if three_d_cancelled}}
+        You cancelled your 3D Secure verification. Would you like to try again?
+        {{else}}
         You will be redirected to a simulation of Verified by Visa (3D Secure page).
         Typically at this stage you would input a passphrase, limits or some sort of a 2FA code to approve the transactions
         and verify your own identity. This redirect happens automatically on most sites with the following parameters:
+        {{/if}}
 
       </div>
 
       <div class="modal-footer">
-        <form method="{{redirect.method}}" action="{{redirect.url}}">
-          {{#each-in redirect.data as |name value|}}
-            {{#if value}}
-              <input type="hidden" name="{{name}}" value="{{value}}">
-            {{/if}}
-            <input type="hidden" name="MD" value="{{merchant_data}}">
-            <input type="hidden" name="TermUrl" value="{{term_url}}">
-          {{/each-in}}
-          <button type="submit" class="btn btn-default pull-left">Go to Bank Page</button>
-        </form>
-        <button type="button" class="btn btn-default dismiss" data-dismiss="modal">Close</button>
+        {{#if three_d_cancelled}}
+          <button type="button" class="btn btn-default" data-dismiss="modal" {{action clear_three_d_params}}>Try Again</button>
+        {{else}}
+          <form method="{{redirect.method}}" action="{{redirect.url}}">
+            {{#each-in redirect.data as |name value|}}
+              {{#if value}}
+                <input type="hidden" name="{{name}}" value="{{value}}">
+              {{/if}}
+              <input type="hidden" name="MD" value="{{merchant_data}}">
+              <input type="hidden" name="TermUrl" value="{{term_url}}">
+            {{/each-in}}
+            <button type="submit" class="btn btn-default pull-left">Go to Bank Page</button>
+          </form>
+          <button type="button" class="btn btn-default dismiss" data-dismiss="modal">Close</button>
+        {{/if}}
       </div>
 
     </div>
