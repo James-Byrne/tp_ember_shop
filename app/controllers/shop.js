@@ -8,6 +8,7 @@ export default Controller.extend({
   tour_bot: inject.service('tour-bot'),
   term_url: ENV.three_d_return,
 
+  transactionId: "T0001",
   total: '10.00',
   currency: 'EUR',
   api: 'realex',
@@ -96,7 +97,15 @@ export default Controller.extend({
   },
 
   merchant_data: computed('checkout_data', function() {
-     return btoa(JSON.stringify(this.get('checkout_data')));
+     return btoa(JSON.stringify(
+         Ember.assign(
+           this.get('checkout_data'),
+           {
+             transactionId: this.get('transactionId'),
+             amount: this.get('total')
+           }
+         )
+     ));
   }),
 
   checkout_data: computed('name', 'number', 'month', 'year', 'cvc', 'api', 'total', 'currency', '3dsecure', function() {
