@@ -102,7 +102,8 @@ export default Controller.extend({
            this.get('checkout_data'),
            {
              transactionId: this.get('transactionId'),
-             amount: this.get('total')
+             amount: this.get('total'),
+             number: this.get('number')
            }
          )
      ));
