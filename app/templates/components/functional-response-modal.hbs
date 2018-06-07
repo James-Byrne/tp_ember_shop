@@ -10,6 +10,11 @@
       </div>
 
       <div class="modal-body">
+        {{#if three_d_return}}
+          You redirected here after the 3D secure page (verified by visa) and got the following result:
+          <br/>
+          <br/>
+        {{/if}}
         {{functionalResponse.description}}
       </div>
 
