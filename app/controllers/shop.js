@@ -13,7 +13,6 @@ export default Controller.extend({
   tour_bot: inject.service('tour-bot'),
   term_url: ENV.three_d_return,
 
-  transactionId: "T0001",
   total: '10.00',
   currency: 'EUR',
   api: 'testingpays',
@@ -50,6 +49,10 @@ export default Controller.extend({
         this.create_response({xml: atob(this.get('xml')), three_d_return: this.get('three_d_return')})
       }
     }
+  },
+
+  transactionId() {
+    return `T-${Date.now()}`;
   },
 
   currentApiText: computed('api', function() {
@@ -115,7 +118,7 @@ export default Controller.extend({
          Ember.assign(
            this.get('checkout_data'),
            {
-             transactionId: this.get('transactionId'),
+             transactionId: this.transactionId(),
              amount: this.get('total'),
              number: this.get('number')
            }
