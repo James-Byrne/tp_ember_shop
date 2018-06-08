@@ -12,22 +12,21 @@
       {{/unless}}
 
       <div class="modal-body">
+        <div class="row">
+          <p class="col-md-12 text-center" style="color: {{if functionalResponse.success 'green' 'red'}};">
+            {{#if functionalResponse.success }}
+            <i class="fa fa-check fa-5x"></i>
+            {{else}}
+            <i class="fa fa-times fa-5x"></i>
+            {{/if}}
+          </p>
+        </div>
         {{#if three_d_return}}
-          <div class="row">
-            <p class="col-md-12 text-center" style="color: {{if functionalResponse.success 'green' 'red'}};">
-              {{#if functionalResponse.success }}
-              <i class="fa fa-check fa-5x"></i>
-              {{else}}
-              <i class="fa fa-times fa-5x"></i>
-              {{/if}}
-            </p>
-          </div>
           <h4 class="modal-title text-center">{{functionalResponse.checkoutmessage}}</h4>
           <br/>
         {{else}}
-          <div class="col-md-12 text-center">
-            {{functionalResponse.description}}
-          </div>
+          <h4 class="modal-title text-center">{{functionalResponse.description}}</h4>
+          <br/>
         {{/if}}
       </div>
 
