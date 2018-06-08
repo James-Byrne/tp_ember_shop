@@ -62,6 +62,16 @@ export default Ember.Service.extend({
       'Contact Us': ['contactUs']
     }
   }, {
+    'code': '110',
+    'success': false,
+    'responseCode': '110_fail_eci',
+    'description': 'A failed 3D Secure verification, possibly fraudulent transaction. ECI result is 7',
+    'checkoutmessage': 'We\'re sorry, you seem to be a fraudster. Contact us if you wish to dispute this.',
+    'checkoutOptions': {
+      'Cancel': ['rest'],
+      'Contact Us': ['contactUs']
+    }
+  }, {
     'code': '600',
     'success': false,
     'responseCode': '600_error',
