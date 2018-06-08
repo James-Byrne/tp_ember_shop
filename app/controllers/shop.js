@@ -4,24 +4,55 @@ import ENV from '../config/environment';
 const { Controller, computed, observer, $, inject } = Ember;
 
 export default Controller.extend({
+  queryParams: ['xml', 'three_d_return', 'three_d_cancelled'],
+  three_d_return: false,
+  three_d_cancelled: false,
+  xml: "",
+
   response_codes: inject.service('response-codes'),
   tour_bot: inject.service('tour-bot'),
+  term_url: ENV.three_d_return,
 
-  total: '0.00',
+  total: '10.00',
   currency: 'EUR',
-  api: 'realex',
+  api: 'testingpays',
+  "3dsecure": 0,
+  name: "Test C. Ard",
+  number: "4242424242424242",
+  year: "21",
+  month: "12",
+  cvc: "123",
 
   // Console & functional responses
   responses: [],
   functionalResponse: {},
+  redirect: {},
 
   init() {
     this._super(...arguments);
-
     // After three seconds show the drawer to the user
-    setTimeout(function() {
+    setTimeout(() => {
+      this.checkFor3DResponse();
+    }, 1000);
+
+    setTimeout(() => {
       $('.response-drawer').css('right', 0);
     }, 3000);
+  },
+
+  // Check if we got a 3D response back
+  checkFor3DResponse() {
+    if (this.get('three_d_return')) {
+      if (this.get('three_d_cancelled')) {
+        $('#redirect-modal').modal('show');
+      } else {
+        this.create_response({xml: atob(this.get('xml')), three_d_return: this.get('three_d_return')})
+      }
+    }
+  },
+
+  transactionId() {
+    return `T-${Date.now()}`;
   },
 
   currentApiText: computed('api', function() {
@@ -36,7 +67,8 @@ export default Controller.extend({
     $('#tour-bot').animate({ scrollTop: $('#tour-bot')[0].scrollHeight }, 1000);
   }),
 
-  create_response(raw_xml) {
+  create_response(result) {
+    let raw_xml = result.xml;
     let xml = $($.parseXML(raw_xml));
     var xml_string = (new XMLSerializer()).serializeToString($.parseXML(raw_xml));
 
@@ -47,14 +79,29 @@ export default Controller.extend({
       message: xml.find('message').text(),
       batchid: xml.find('batchid').text(),
       authcode: xml.find('authcode').text(),
-      xml: xml_string
+      xml: xml_string,
+      three_d_return: result.three_d_return
     };
 
     // Generate a message from the tour bot
     this.get('tour_bot').valid_purchase(response);
 
-    this.get('responses').pushObject(response);
-    this.create_functional_response(xml.find('result').text());
+    if (result.url && result.data && result.method) {
+      // Create a redirect modal
+      this.create_redirect(result);
+    } else {
+      this.get('responses').pushObject(response);
+      this.create_functional_response(xml.find('result').text());
+    }
+  },
+
+  create_redirect(obj) {
+    // Set the term url on the object
+    this.set('redirect', obj);
+    $('#redirect-modal').modal('show');
+    setTimeout(() => {
+      $('form#3ds-form').submit();
+    }, 3000);
   },
 
   create_functional_response(code) {
@@ -66,11 +113,21 @@ export default Controller.extend({
     }
   },
 
-  checkout() {
-    $.ajax({
-      url: `${ENV.shop_url}/api/pay`,
-      type: 'POST',
-      data: {
+  merchant_data: computed('checkout_data', function() {
+     return btoa(JSON.stringify(
+         Ember.assign(
+           this.get('checkout_data'),
+           {
+             transactionId: this.transactionId(),
+             amount: this.get('total'),
+             number: this.get('number')
+           }
+         )
+     ));
+  }),
+
+  checkout_data: computed('name', 'number', 'month', 'year', 'cvc', 'api', 'total', 'currency', '3dsecure', function() {
+      return {
         firstName: this.get('name'),
         lastName: this.get('name'),
         cardNumber: this.get('number'),
@@ -79,11 +136,23 @@ export default Controller.extend({
         cvv: this.get('cvc'),
         api: this.get('api'),
         total: this.get('total'),
-        currency: this.get('currency')
-      }
+        currency: this.get('currency'),
+        "3dsecure": this.get('3dsecure')
+      };
+  }),
+
+  checkout() {
+    $.ajax({
+      url: `${ENV.shop_url}/api/pay`,
+      type: 'POST',
+      data: this.get('checkout_data')
     }).done((res) => {
       // Create the new response item
-      this.create_response(res);
+      try {
+        this.create_response(JSON.parse(res));
+      } catch (e) {
+        this.create_response(res);
+      }
     }).fail(function() {
       // createFunctionalResponse('timeout');
     });
@@ -146,6 +215,12 @@ export default Controller.extend({
     // Re-submit the form ensuring a success message
     retry() {
       this.retryPurchase();
+    },
+
+    clear_three_d_params() {
+      this.set('three_d_cancelled', false);
+      this.set('three_d_return', false);
+      this.set('xml', '');
     }
   }
 });

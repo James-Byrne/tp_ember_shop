@@ -1,0 +1,56 @@
+<div id="redirect-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        {{#if three_d_cancelled}}
+          <h4 class="modal-title">3D Secure Cancelled</h4>
+        {{else}}
+          <h4 class="modal-title">3D Secure Redirect</h4>
+        {{/if}}
+      </div>
+
+      <div class="modal-body">
+        <div class="row">
+          {{#if three_d_cancelled}}
+            <div class="row">
+              <p class="col-md-12 text-center" style="color: red;">
+                <i class="fa fa-times fa-5x"></i>
+              </p>
+            </div>
+            <p class="col-md-12 text-center">
+            You cancelled your 3D Secure verification. Would you like to try again?
+            </p>
+          {{else}}
+            <br>
+            <form id="3ds-form" method="{{redirect.method}}" action="{{redirect.url}}">
+              {{#each-in redirect.data as |name value|}}
+                {{#if value}}
+                  <input type="hidden" name="{{name}}" value="{{value}}">
+                {{/if}}
+                <input type="hidden" name="MD" value="{{merchant_data}}">
+                <input type="hidden" name="TermUrl" value="{{term_url}}">
+              {{/each-in}}
+            </form>
+            <div class="row">
+              <p class="col-md-12 text-center">
+                <i class="fa fa-spinner fa-spin fa-5x"></i>
+              </p>
+            </div>
+          {{/if}}
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        {{#if three_d_cancelled}}
+          <button type="button" class="btn btn-default" data-dismiss="modal" {{action clear_three_d_params}}><i class="fa fa-university"></i> Contact your bank</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal" {{action clear_three_d_params}}><i class="fa fa-redo"></i> Try Again</button>
+        {{/if}}
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -52,6 +52,18 @@
     {{input id="convertedTotal" class="form-control" disabled="true" value=converted_total}}
   </div>
 
+  <div class="col-sm-5 form-group">
+    <label for="3dsecure" class="control-label">
+      3D Secure
+      <span id="3d-info" class="glyphicon glyphicon-info-sign {{api}}" aria-hidden="true" data-toggle="tooltip" data-placement="right" data-title="{{three_d_info}}"></span>
+    </label>
+      <button id="3d-selection" class="btn btn-primary dropdown-toggle form-control" data-toggle="dropdown" value="{{3dsecure}}">{{three_d_display}} <span class="caret"></span></button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a {{action 'change_3dsecure' 0}}>Auth Only</a></li>
+        <li><a {{action 'change_3dsecure' 1}}>3D Secure Flow</a></li>
+      </ul>
+  </div>
+
   <div class="col-sm-10">
     <button class="btn btn-primary btn-block" {{action (action submitPayment)}} disabled="{{if isValid "" "true"}}" style="line-height: 25px; margin-top:20px;"><span class="glyphicon glyphicon-lock"></span> Pay Safely</button>
   </div>

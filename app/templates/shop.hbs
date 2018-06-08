@@ -22,6 +22,7 @@
       cvc=cvc
       total=total
       currency=currency
+      3dsecure=3dsecure
       api=api
       card_number_field_focused=(action "card_number_field_focused")
       purchase_amount_field_focused=(action "purchase_amount_field_focused")
@@ -67,8 +68,18 @@
   </div>
 </div>
 
+{{redirect-modal
+  redirect=redirect
+  term_url=term_url
+  three_d_cancelled=three_d_cancelled
+  clear_three_d_params=(action 'clear_three_d_params')
+  merchant_data=merchant_data
+  }}
+
 {{functional-response-modal
   functionalResponse=functionalResponse
+  three_d_return=three_d_return
+  clear_three_d_params=(action 'clear_three_d_params')
   highlight=(action "highlight")
   change_currency=(action "change_currency")
   retry=(action "retry")

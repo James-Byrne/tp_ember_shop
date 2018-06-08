@@ -5,7 +5,7 @@ const { Service } = Ember;
 export default Service.extend({
   events: null,
   tour_bot_responses: [],
-  current_api: 'realex',
+  current_api: 'testingpays',
 
 
   init() {
@@ -57,10 +57,14 @@ export default Service.extend({
 
     events.on('valid_purchase_testingpays', (response) => {
       let mapping = (response.result === '00') ? 'Success' : `Error ${response.result}`;
+      let message = `You sent an amount to the sim, which mapped to ${mapping}.`;
+      if (response.three_d_return) {
+        message = `You have returned from the 3D secure (verified by visa) page to the demo shop and you sent an amount to the sim, which mapped to ${mapping}.`;
+      }
 
       this.get('tour_bot_responses').pushObject({
         api: this.get('current_api'),
-        message: `You sent an amount to the sim, which mapped to ${mapping}.`
+        message: message
       });
     });
 

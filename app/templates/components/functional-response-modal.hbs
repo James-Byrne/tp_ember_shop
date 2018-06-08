@@ -4,21 +4,47 @@
     <!-- Modal content-->
     <div class="modal-content">
 
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">{{functionalResponse.checkoutmessage}}</h4>
-      </div>
+      {{#unless three_d_return}}
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">{{functionalResponse.checkoutmessage}}</h4>
+        </div>
+      {{/unless}}
 
       <div class="modal-body">
-        {{functionalResponse.description}}
+        {{#if three_d_return}}
+          <div class="row">
+            <p class="col-md-12 text-center" style="color: {{if functionalResponse.success 'green' 'red'}};">
+              {{#if functionalResponse.success }}
+              <i class="fa fa-check fa-5x"></i>
+              {{else}}
+              <i class="fa fa-times fa-5x"></i>
+              {{/if}}
+            </p>
+          </div>
+          <h4 class="modal-title text-center">{{functionalResponse.checkoutmessage}}</h4>
+          <br/>
+        {{else}}
+          <div class="col-md-12 text-center">
+            {{functionalResponse.description}}
+          </div>
+        {{/if}}
       </div>
 
       <div class="modal-footer">
-        {{#each-in functionalResponse.checkoutOptions as |option value|}}
-          <button type="button" {{action value.[0] value.[1]}} class="btn btn-default dismiss {{option}}" data-dismiss="modal">
-            {{option}}
-          </button>
-        {{/each-in}}
+        {{#if three_d_return}}
+          {{#if functionalResponse.success }}
+          <button type="button" class="btn btn-success" data-dismiss="modal" {{action clear_three_d_params}}><i class="fa fa-shopping-cart"></i> Keep Shopping</button>
+          {{else}}
+          <button type="button" class="btn btn-default" data-dismiss="modal" {{action clear_three_d_params}}><i class="fa fa-redo"></i> Try Again</button>
+          {{/if}}
+        {{else}}
+          {{#each-in functionalResponse.checkoutOptions as |option value|}}
+            <button type="button" {{action value.[0] value.[1]}} class="btn btn-default dismiss {{option}}" data-dismiss="modal">
+              {{option}}
+            </button>
+          {{/each-in}}
+        {{/if}}
       </div>
 
     </div>

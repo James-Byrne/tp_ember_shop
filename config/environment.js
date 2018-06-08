@@ -38,6 +38,7 @@ module.exports = function(environment) {
 
   if (environment === 'development') {
     ENV.shop_url = 'http://localhost:8001';
+    ENV.three_d_return = 'http://localhost:8801/three_d_success';
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
@@ -59,6 +60,7 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     ENV.shop_url = 'http://34.250.176.158';
+    ENV.three_d_return = 'http://34.250.176.158/three_d_success';
   }
 
   return ENV;

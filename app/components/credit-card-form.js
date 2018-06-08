@@ -58,6 +58,14 @@ export default Component.extend({
     }
   }),
 
+  three_d_display: computed('3dsecure', function() {
+    if (this.get('3dsecure') === 0) {
+      return "Auth Only";
+    } else {
+      return "3D Secure Flow";
+    }
+  }),
+
   card_number_info: computed('api', function() {
     let holder;
 
@@ -68,6 +76,9 @@ export default Component.extend({
     }
 
     return holder;
+  }),
+  three_d_info: computed('api', function () {
+    return 'Switch between 3D secure flow and regular flow for the payment. Enabling 3D secure flow (Verified by Visa) will lead you to a simulated bank page where normally you would put in your password / code to approve the transaction.';
   }),
 
   total_info: computed('api', function () {
@@ -116,6 +127,10 @@ export default Component.extend({
   actions: {
     pad_totals: function () {
       this.format_totals();
+    },
+    change_3dsecure: function(sec) {
+      this.set('3dsecure', sec);
+      $('#3d-selection').html(this.get('three_d_display') + ' <span class="caret"></span>');
     },
 
     change_currency: function(currency) {
