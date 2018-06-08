@@ -1,16 +1,16 @@
-{{#each responses as |response|}}
+{{#each responses as |response index|}}
   <div class="panel-group {{if (eq '00' response.result) "success" "error"}}">
     <div class="panel panel-default">
 
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a href="#R-{{@index}}" data-toggle="collapse">Result Code : {{response.result}}</a>
+          <a href="#R-{{index}}" data-toggle="collapse">Result Code : {{response.result}}</a>
           <span class="badge-{{response.api}}">{{response.api}}</span>
-          <a href="#R-{{@index}}" class="glyphicon glyphicon-triangle-bottom pull-right" data-toggle="collapse"></a>
+          <a href="#R-{{index}}" class="glyphicon glyphicon-triangle-bottom pull-right" data-toggle="collapse"></a>
         </h4>
       </div>
 
-      <div id="R-{{@index}}" class="panel-collapse collapse">
+      <div id="R-{{index}}" class="panel-collapse collapse">
         <div class="panel-body">
           <p>Message : {{response.message}}</p>
           <p>CVN Result : {{response.cvnresult}}</p>
