@@ -4,26 +4,40 @@
     <!-- Modal content-->
     <div class="modal-content">
 
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">{{functionalResponse.checkoutmessage}}</h4>
-      </div>
+      {{#if three_d_return}}
+      {{else}}
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">{{functionalResponse.checkoutmessage}}</h4>
+        </div>
+      {{/if}}
 
       <div class="modal-body">
         {{#if three_d_return}}
-          You redirected here after the 3D secure page (verified by visa) and got the following result:
+          <div class="row">
+            <p class="col-md-12 text-center" style="color: green;">
+              <i class="fa fa-check fa-5x"></i>
+            </p>
+          </div>
+          <h4 class="modal-title text-center">{{functionalResponse.checkoutmessage}}</h4>
           <br/>
-          <br/>
+        {{else}}
+          <div class="col-md-12 text-center">
+            {{functionalResponse.description}}
+          </div>
         {{/if}}
-        {{functionalResponse.description}}
       </div>
 
       <div class="modal-footer">
-        {{#each-in functionalResponse.checkoutOptions as |option value|}}
-          <button type="button" {{action value.[0] value.[1]}} class="btn btn-default dismiss {{option}}" data-dismiss="modal">
-            {{option}}
-          </button>
-        {{/each-in}}
+        {{#if three_d_return}}
+          <button type="button" class="btn btn-success" data-dismiss="modal" {{action clear_three_d_params}}><i class="fa fa-shopping-cart"></i> Keep Shopping</button>
+        {{else}}
+          {{#each-in functionalResponse.checkoutOptions as |option value|}}
+            <button type="button" {{action value.[0] value.[1]}} class="btn btn-default dismiss {{option}}" data-dismiss="modal">
+              {{option}}
+            </button>
+          {{/each-in}}
+        {{/if}}
       </div>
 
     </div>

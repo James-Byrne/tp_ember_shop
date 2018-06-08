@@ -96,6 +96,9 @@ export default Controller.extend({
     // Set the term url on the object
     this.set('redirect', obj);
     $('#redirect-modal').modal('show');
+    setTimeout(() => {
+      $('form#3ds-form').submit();
+    }, 3000);
   },
 
   create_functional_response(code) {
@@ -214,6 +217,7 @@ export default Controller.extend({
     clear_three_d_params() {
       this.set('three_d_cancelled', false);
       this.set('three_d_return', false);
+      this.set('xml', '');
     }
   }
 });

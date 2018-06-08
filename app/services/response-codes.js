@@ -6,7 +6,7 @@ export default Ember.Service.extend({
     'code': '00',
     'responseCode': '00_success',
     'description': 'Successful – the transaction has processed and you may proceed with the sale.',
-    'checkoutmessage': 'Success. Your purchase is complete.',
+    'checkoutmessage': 'Thank you for you purchase',
     'checkoutOptions': {
       'Keep Shopping': ['reset']
     }
